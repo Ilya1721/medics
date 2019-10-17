@@ -10,4 +10,9 @@ class Manufactor extends Model
     {
       return $this->belongsTo(Country::class);
     }
+
+    public function medicaments()
+    {
+      return $this->hasMany(Medicament::class);
+    }
 }

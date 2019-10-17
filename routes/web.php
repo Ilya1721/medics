@@ -34,6 +34,8 @@ Route::get('/treatment/create', 'TreatmentController@create');
 Route::post('/treatments', 'TreatmentController@store');
 Route::get('/presence/create', 'PresenceController@create');
 Route::post('/presence', 'PresenceController@store');
+Route::get('/disease/create', 'DiseaseController@create');
+Route::post('/disease', 'DiseaseController@store');
 Route::get('/medicaments/create', 'MedicamentController@create');
 Route::post('/medicaments', 'MedicamentController@store');
 Route::get('/procedures/create', 'ProcedureController@create');

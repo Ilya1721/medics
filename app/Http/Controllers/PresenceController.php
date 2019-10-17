@@ -20,7 +20,7 @@ class PresenceController extends Controller
     public function index()
     {
       $presences = Presence::query()
-                   ->where('presences.doctor_id', '=', Auth::user()->id)
+                   ->where('presences.doctor_id', '=', Auth::user()->employee->id)
                    ->get();
 
       return view('presence', [

@@ -10,4 +10,9 @@ class Department extends Model
     {
       return $this->belongsTo(Clinic::class);
     }
+
+    public function rooms()
+    {
+      return $this->hasMany(Room::class);
+    }
 }

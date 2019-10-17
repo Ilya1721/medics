@@ -10,4 +10,9 @@ class Clinic extends Model
     {
       return $this->belongsTo(City::class);
     }
+
+    public function departments()
+    {
+      return $this->hasMany(Department::class);
+    }
 }

@@ -12,4 +12,9 @@ class Patient extends Model
     {
       return $this->belongsTo(City::class);
     }
+
+    public function diseases()
+    {
+      return $this->hasMany(Disease::class);
+    }
 }

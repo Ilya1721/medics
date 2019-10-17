@@ -10,4 +10,9 @@ class City extends Model
     {
       return $this->belongsTo(Country::class);
     }
+
+    public function clinics()
+    {
+      return $this->hasMany(Clinic::class);
+    }
 }

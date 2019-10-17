@@ -7,7 +7,7 @@
     </div>
     <div class="col-6">
       <h3>Всі хвороби</h3>
-      <a class="btn btn-primary" role="button" href="#">Додати Запис</a>
+      <a class="btn btn-primary" role="button" href="/disease/create">Додати Запис</a>
       @foreach($diseases as $disease)
         @if($count % 2 == 0)
           <div class="row mt-2">
@@ -17,9 +17,17 @@
             <div class="card-body">
               <h5 class="card-title font-weight-bold">{{ $disease->name }}</h5>
               <p class="card-title font-weight-bold">Симптоми:</p>
-              <p class="card-text">Кашель, висока температура, головний біль</p>
+              <p class="card-text">
+                @foreach($disease->symptoms as $symptom)
+                  {{ $symptom->name }},
+                @endforeach
+              </p>
               <p class="card-title font-weight-bold">Лікування</p>
-              <p class="card-text">Гарячий чай, Іммунал, Постільний режим</p>
+              <p class="card-text">
+                @foreach($disease->treatments as $treatment)
+                  {{ $treatment->name }},
+                @endforeach
+              </p>
               <a class="card-text btn btn-primary text-right" role="button" href="#">Редактувати</a>
             </div>
           </div>
