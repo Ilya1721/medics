@@ -54,3 +54,5 @@ Route::get('/medicaments/{medicament}/edit', 'MedicamentController@edit')->name(
 Route::patch('/medicaments/{medicament}', 'MedicamentController@update')->name('medicament.update');
 Route::get('/procedures/{procedure}/edit', 'ProcedureController@edit')->name('procedure.edit');
 Route::patch('/procedures/{procedure}', 'ProcedureController@update')->name('procedure.update');
+Route::get('/diseases/{disease}/edit', 'DiseaseController@edit')->name('disease.edit');
+Route::patch('/diseases/{disease}', 'DiseaseController@update')->name('disease.update');

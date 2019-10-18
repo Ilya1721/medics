@@ -45,5 +45,10 @@
     </div>
   </div>
   @endforeach
+  <div class="row mt-3">
+    <div class="col-12 d-flex justify-content-center">
+      {{ $presences->links() }}
+    </div>
+  </div>
 </div>
 @endsection

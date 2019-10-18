@@ -9,7 +9,9 @@ class SymptomController extends Controller
 {
     public function index()
     {
-      $symptoms = Symptom::all();
+      $symptoms = Symptom::query()
+                  ->orderBy('updated_at', 'DESC')
+                  ->paginate(6);
 
       return view('symptoms', [
         'symptoms' => $symptoms,

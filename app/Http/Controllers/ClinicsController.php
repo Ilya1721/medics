@@ -9,7 +9,9 @@ class ClinicsController extends Controller
 {
     public function index()
     {
-      $clinics = Clinic::all();
+      $clinics = Clinic::query()
+                ->orderBy('updated_at', 'DESC')
+                ->paginate(2);
 
       return view('clinics', [
         'clinics' => $clinics,

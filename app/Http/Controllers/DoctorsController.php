@@ -13,7 +13,9 @@ class DoctorsController extends Controller
     {
       $doctors = Employee::query()
                  ->join('jobs', 'jobs.id', '=', 'employees.job_id')
-                 ->where('jobs.name', 'Лікар')->get();
+                 ->where('jobs.name', 'Лікар')
+                 ->orderBy('employees.updated_at', 'DESC')
+                 ->paginate(6);
 
       return view('doctors', [
         'doctors' => $doctors,

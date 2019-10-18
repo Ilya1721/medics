@@ -68,6 +68,11 @@
           </div>
         </div>
         @endforeach
+        <div class="row mt-3">
+          <div class="col-12 d-flex justify-content-center">
+            {{ $clinics->links() }}
+          </div>
+        </div>
       </div>
       <div id="footer">
         <!--./components/Footer.js-->

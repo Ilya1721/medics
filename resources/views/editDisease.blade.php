@@ -7,14 +7,15 @@
       <div class="card">
         <div class="card-header">{{ __('Register') }}</div>
         <div class="card-body">
-          <form method="POST" action="/disease">
+          <form method="POST" action="/diseases/{{ $disease->id }}">
             @csrf
+            @method('PATCH')
 
             <div class="form-group row">
               <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Назва') }}</label>
 
               <div class="col-md-6">
-                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $disease->name }}" required autocomplete="name" autofocus>
 
                   @error('name')
                       <span class="invalid-feedback" role="alert">
@@ -41,7 +42,7 @@
             <div class="form-group row">
               <label for="symptom_id_array" class="col-md-4 col-form-label text-md-right">{{ __('Симптом') }}</label>
               <div class="col-md-6">
-                  <select multiple id="symptom_id_array" class="form-control" @error('symptom_id_array') is-invalid @enderror name="symptom_id_array[]" required autofocus>
+                  <select multiple id="symptom_id_array" class="form-control" @error('symptom_id_array') is-invalid @enderror name="symptom_id_array[]" autofocus>
                     @foreach($symptoms as $symptom)
                     <option value={{ $symptom->id }}>{{ $symptom->name }}</option>
                     @endforeach
@@ -55,9 +56,9 @@
             </div>
 
             <div class="form-group row">
-              <label for="treatment_id_array" class="col-md-4 col-form-label text-md-right">{{ __('Лікування') }}</label>
+              <label for="treatment_id_array[]" class="col-md-4 col-form-label text-md-right">{{ __('Лікування') }}</label>
               <div class="col-md-6">
-                  <select multiple id="treatment_id_array" class="form-control" @error('treatment_id_array') is-invalid @enderror name="treatment_id_array[]" required autofocus>
+                  <select multiple id="treatment_id_array" class="form-control" @error('treatment_id_array') is-invalid @enderror name="treatment_id_array[]" autofocus>
                     @foreach($treatments as $treatment)
                     <option value={{ $treatment->id }}>{{ $treatment->name }}</option>
                     @endforeach
@@ -73,7 +74,7 @@
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-4">
                   <button type="submit" class="btn btn-primary">
-                      {{ __('Register') }}
+                      {{ __('Submit') }}
                   </button>
               </div>
             </div>

@@ -9,7 +9,9 @@ class ProcedureController extends Controller
 {
     public function index()
     {
-      $procedures = Procedure::all();
+      $procedures = Procedure::query()
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(6);
 
       return view('procedures', [
         'procedures' => $procedures,

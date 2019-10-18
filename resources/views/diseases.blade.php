@@ -2,10 +2,10 @@
 
 @section('content')
   <div class="row mx-4">
-    <div class="col">
+    <div class="col-2">
 
     </div>
-    <div class="col-6">
+    <div class="col-8">
       <h3>Всі хвороби</h3>
       <a class="btn btn-primary" role="button" href="/disease/create">Додати Запис</a>
       @foreach($diseases as $disease)
@@ -22,13 +22,13 @@
                   {{ $symptom->name }},
                 @endforeach
               </p>
-              <p class="card-title font-weight-bold">Лікування</p>
+              <p class="card-title font-weight-bold">Лікування:</p>
               <p class="card-text">
                 @foreach($disease->treatments as $treatment)
                   {{ $treatment->name }},
                 @endforeach
               </p>
-              <a class="card-text btn btn-primary text-right" role="button" href="#">Редактувати</a>
+              <a class="card-text btn btn-primary text-right" role="button" href="/diseases/{{ $disease->id }}/edit">Редактувати</a>
             </div>
           </div>
         </div>
@@ -37,8 +37,13 @@
         </div>
       @endif
       @endforeach
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-center">
+          {{ $diseases->links() }}
+        </div>
+      </div>
     </div>
-    <div class="col">
+    <div class="col-2">
 
     </div>
   </div>

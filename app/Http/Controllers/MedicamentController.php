@@ -10,7 +10,9 @@ class MedicamentController extends Controller
 {
     public function index()
     {
-      $medicaments = Medicament::all();
+      $medicaments = Medicament::query()
+                     ->orderBy('updated_at', 'DESC')
+                     ->paginate(6);
 
       return view('medicaments', [
         'medicaments' => $medicaments,

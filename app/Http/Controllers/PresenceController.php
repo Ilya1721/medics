@@ -21,7 +21,7 @@ class PresenceController extends Controller
     {
       $presences = Presence::query()
                    ->where('presences.doctor_id', '=', Auth::user()->employee->id)
-                   ->get();
+                   ->orderBy('presences.updated_at', 'DESC')->paginate(3);
 
       return view('presence', [
         'presences' => $presences,

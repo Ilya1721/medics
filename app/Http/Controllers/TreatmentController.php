@@ -9,7 +9,9 @@ class TreatmentController extends Controller
 {
     public function index()
     {
-      $treatments = Treatment::all();
+      $treatments = Treatment::query()
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(6);
 
       return view('treatments', [
         'treatments' => $treatments,

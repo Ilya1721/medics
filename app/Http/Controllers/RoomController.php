@@ -10,7 +10,9 @@ class RoomController extends Controller
 {
     public function index()
     {
-      $rooms = Room::all();
+      $rooms = Room::query()
+               ->orderBy('updated_at')
+               ->paginate(6);
 
       return view('rooms', [
         'rooms' => $rooms,
