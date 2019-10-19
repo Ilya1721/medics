@@ -52005,31 +52005,6 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav mr-auto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item dropdown"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "nav-link dropdown-toggle",
-        href: "#",
-        id: "navbarDropdown",
-        role: "button",
-        "data-toggle": "dropdown",
-        "aria-haspopup": "true",
-        "aria-expanded": "false"
-      }, "\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0441\u0432\u043E\u0454 \u043C\u0456\u0441\u0442\u043E"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "dropdown-menu",
-        "aria-labelledby": "navbarDropdown"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "\u0425\u043C\u0435\u043B\u044C\u043D\u0438\u0446\u044C\u043A\u0438\u0439"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "\u0416\u0438\u0442\u043E\u043C\u0438\u0440"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "\u0412\u0456\u043D\u043D\u0438\u0446\u044F"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "dropdown-item",
-        href: "#"
-      }, "\u0422\u0435\u0440\u043D\u043E\u043F\u0456\u043B\u044C"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item active"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link text-secondary",

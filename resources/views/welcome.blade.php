@@ -19,21 +19,10 @@
 
     </head>
     <body>
-      <div> <!-- Change to React -->
+      <div>
         <nav class="navbar navbar-light bg-light navbar-expand-lg">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Оберіть своє місто
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Хмельницький</a>
-                  <a class="dropdown-item" href="#">Житомир</a>
-                  <a class="dropdown-item" href="#">Вінниця</a>
-                  <a class="dropdown-item" href="#">Тернопіль</a>
-                </div>
-              </li>
               <li class="nav-item active">
                 <a class="nav-link text-secondary" href="/doctors">Лікарі <span class="sr-only">(current)</span></a>
               </li>
@@ -65,19 +54,6 @@
         <main>
           <div class="container mt-3">
             <h1 class="text-center">Зручна система для обліку пацієнтів</h1>
-            <div class="row mt-4">
-              <div class="col-md-12 text-center">
-                <div class="dropdown btn-group">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Знайти лікаря
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="nav-link dropdown-item" href="#">Терапевт</a></li>
-                    <li><a class="nav-link dropdown-item" href="#">Стоматолог</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
             <div class="row mt-5">
               <div class="col">
                 <h3>2735 лікарів</h3>
@@ -100,14 +76,13 @@
               <div class="col md-12 text-center">
                 <h3>Сподобалась Система?</h3>
                 <p>Економте свій час</p>
-                <a class="btn btn-primary" href="#" role="button">Створити обліковий запис</a>
               </div>
             </div>
           </div>
         </main>
       </div>
-      <div style="margin-top: 130px;">
-        <nav class="navbar mt-5 sticky-bottom navbar-expand-sm navbar-dark bg-dark">
+      <div>
+        <nav class="navbar mt-5 fixed-bottom navbar-expand-sm navbar-dark bg-dark">
             <a class="navbar-brand" href="#">KN-17-2</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

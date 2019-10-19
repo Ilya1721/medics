@@ -12,4 +12,9 @@ class Treatment extends Model
     {
       return $this->belongsToMany(Disease::class, 'treatment_diseases');
     }
+
+    public function patients()
+    {
+      return $this->belongsToMany(Patient::class, 'patient_treatment');
+    }
 }

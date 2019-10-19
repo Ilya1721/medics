@@ -10,7 +10,7 @@ class Disease extends Model
 
     public function patients()
     {
-      return $this->hasMany(Patient::class);
+      return $this->belongsToMany(Patient::class, 'patient_diseases');
     }
 
     public function symptoms()

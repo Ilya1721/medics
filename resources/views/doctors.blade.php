@@ -19,9 +19,21 @@
 
     </head>
     <body>
-      <div id="header">
-        <!--./components/Header.js-->
-      </div>
+      <nav class="navbar navbar-light bg-light navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-secondary" href="/doctors">Лікарі <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-secondary" href="/clinics">Клініки <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-secondary" href="/welcome">Головна сторінка <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <div class="container">
         <h2 class="text-center mt-3">Лікарі</h2>
         @foreach($doctors as $doctor)
@@ -57,9 +69,6 @@
             {{ $doctors->links() }}
           </div>
         </div>
-      </div>
-      <div id="footer">
-        <!--./components/Footer.js-->
       </div>
     </body>
 </html>

@@ -23,7 +23,7 @@
           </div>
         </div>
         @php($count++)
-        @if($count % 2 == 0)
+        @if($count % 2 == 0 || $count == count($procedures))
           </div>
         @endif
         @endforeach

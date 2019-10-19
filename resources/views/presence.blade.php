@@ -24,7 +24,7 @@
         Доктор: {{ $presence->doctor->last_name }} {{ $presence->doctor->first_name }} {{ $presence->doctor->father_name }}
       </div>
       <div class="col">
-        <a class="btn btn-primary" role="button" href="/patients/data/show">
+        <a class="btn btn-primary" role="button" href="/patient/{{ $presence->patient->id }}/show">
           <span class="mx-5">Детальніше</span>
         </a>
       </div>

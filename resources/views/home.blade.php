@@ -4,7 +4,7 @@
   <div class="row mx-4">
     <div class="col-2 text-left">
       <div class="my-3">
-        <img src="/img/noImage.png" style="width: 250px; height: 300px;" />
+        <img src="/img/noImage.png" style="width: 150px; height: 200px;" />
       </div>
       <h4>{{ $user->employee->last_name }} {{ $user->employee->first_name }} {{ $user->employee->father_name }}</h4>
       <div class="btn-group-vertical" role="group">
