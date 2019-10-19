@@ -5,31 +5,34 @@
     <div class="col-3">
       <h4>{{ $patient->last_name }} {{ $patient->first_name }} {{ $patient->father_name }}</h4>
       <div class="btn-group-vertical" role="group">
-        <a class="btn btn-outline-primary btn-lg" role="button" href="#"><span class="mx-5">Назначити лікування</span></a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="#"><span class="mx-5">Назначити процедури</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/treatment/create">
+          <span class="mx-5">Назначити лікування</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ patient->id }}/procedure/create"><span class="mx-5">Назначити процедуру</span></a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/data/create"><span class="mx-5">Назначити показник</span></a>
       </div>
     </div>
     <div class="col-6">
-      <h3>Останні показники</h3>
-      @foreach($patient->patientData as $patientData)
+      <h3>Останні лікування</h3>
+      @foreach($patient->treatments as $treatment)
         @if($count % 2 == 0)
           <div class="row mt-2">
         @endif
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ $patientData->name }}</h5>
-              <p class="card-text">{{ $patientData->value }} {{ $patientData->unit_of_measure }}</p>
+              <h5 class="card-title">{{ $treatment->name }}</h5>
+              <p class="card-text">{{ $treatment->description }}</p>
+              <p class="card-text">Дата призначення: {{ $date_plan }}</p>
               <a class="card-text btn btn-primary text-right" role="button"
-               href="/patient/{{ $patient->id }}/data/{{ $patientData->id}}/edit">
+               href="/patient/{{ $patient->id }}/treatment/{{ $treatment->id}}/edit">
                Редактувати
               </a>
             </div>
           </div>
         </div>
         @php($count++)
-        @if($count % 2 == 0 || $count == count($patient->patientData))
+        @if($count % 2 == 0 || $count == count($patient->treatments))
           </div>
         @endif
         @endforeach
@@ -37,8 +40,12 @@
     <div class="col-3">
       <h4 class="mt-2">Данні</h4>
       <div class="btn-group-vertical" role="group">
-        <a class="btn btn-outline-primary btn-lg" role="button" href="#"><span class="mx-5">Лікування</span></a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="#"><span class="mx-5">Процедури</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/show">
+          <span class="mx-5">Показники</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedures/show">
+          <span class="mx-5">Процедури</span>
+        </a>
       </div>
     </div>
   </div>
