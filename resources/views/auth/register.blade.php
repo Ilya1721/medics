@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('Імя') }}</label>
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('Ім`я') }}</label>
 
                             <div class="col-md-6">
                                 <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
@@ -70,11 +70,11 @@
                         <div class="form-group row">
                           <label for="city_id" class="col-md-4 col-form-label text-md-right">{{ __('Місто') }}</label>
                           <div class="col-md-6">
-                              <select id="city_id" class="form-control" @error('city_id') is-invalid @enderror name="city_id" required autofocus>
-                                @foreach($cities as $city)
-                                <option value={{ $city->id }}>{{ $city->name }}</option>
-                                @endforeach
-                              </select>
+                            <select id="city_id" class="form-control" @error('city_id') is-invalid @enderror name="city_id" required autofocus>
+                              @foreach($cities as $city)
+                              <option value={{ $city->id }}>{{ $city->name }}</option>
+                              @endforeach
+                            </select>
                               @error('city_id')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>

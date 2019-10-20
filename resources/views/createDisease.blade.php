@@ -39,18 +39,25 @@
             </div>
 
             <div class="form-group row">
-              <label for="symptom_id_array" class="col-md-4 col-form-label text-md-right">{{ __('Симптом') }}</label>
+              <label for="symptom_array" class="col-md-4 col-form-label text-md-right">{{ __('Симптоми') }}</label>
               <div class="col-md-6">
-                  <select multiple id="symptom_id_array" class="form-control" @error('symptom_id_array') is-invalid @enderror name="symptom_id_array[]" required autofocus>
-                    @foreach($symptoms as $symptom)
-                    <option value={{ $symptom->id }}>{{ $symptom->name }}</option>
-                    @endforeach
-                  </select>
-                  @error('symptom_id_array')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
+                <div id="symptoms">
+                  <input id="symptom_array" type="text" class="form-control @error('symptom_array') is-invalid @enderror"
+                  name="symptom_array[]" required value="{{ old('symptom_array') }}" autocomplete="symptom_array" autofocus>
+                </div>
+                <div class="row mt-2">
+                  <div class="col">
+                    <button class="btn btn-info" onClick="moreSymptoms()">Більше симптомів</button>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-danger ml-1" onClick="lessSymptoms()">Менше симптомів</button>
+                  </div>
+                </div>
+                @error('symptom_array')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
               </div>
             </div>
 
@@ -83,4 +90,27 @@
     </div>
   </div>
 </div>
+<script>
+  function moreSymptoms()
+  {
+    var input = document.createElement('input');
+    input.className = "form-control @error('symptom_array') is-invalid @enderror";
+    input.id = "symptom_array";
+    input.type = "text";
+    input.setAttribute("name", "symptom_array[]");
+    input.setAttribute("required", "required");
+    input.setAttribute("value", "{{ old('symptom_array') }}");
+    input.setAttribute("autocomplete", "symptom_array");
+    input.setAttribute("autofocus", "autofocus");
+
+    var div = document.getElementById('symptoms')
+    div.appendChild(input);
+  }
+
+  function lessSymptoms()
+  {
+    var input = document.getElementById('symptom_array');
+    input.remove();
+  }
+</script>
 @endsection

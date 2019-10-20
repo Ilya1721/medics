@@ -8,9 +8,14 @@
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/treatment/create">
           <span class="mx-5">Назначити лікування</span>
         </a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedure/create"><span class="mx-5">Назначити процедуру</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedure/create">
+          <span class="mx-5">Назначити процедуру</span>
+        </a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/data/create">
-          <span class="mx-5">Назначити показник</span>
+          <span class="mx-5">Вказати показник</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptom/create">
+          <span class="mx-5">Вказати симптом</span>
         </a>
       </div>
     </div>
@@ -46,6 +51,9 @@
         </a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedures/show">
           <span class="mx-5">Процедури</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptoms/show">
+          <span class="mx-5">Симптоми</span>
         </a>
       </div>
     </div>

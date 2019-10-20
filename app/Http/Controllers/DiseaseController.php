@@ -97,8 +97,6 @@ class DiseaseController extends Controller
       ]);
       $disease->update($diseaseData);
 
-
-
       foreach($symptomDataArray as $symptomData)
       {
         DB::table('symptom_diseases')

@@ -17,6 +17,7 @@ class CreateSymptomsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('unit_of_measure');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
