@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Назначити показник') }}</div>
+        <div class="card-header">{{ __('Вказати показник') }}</div>
         <div class="card-body">
           <form method="POST" action="/patient/{{ $patient->id }}/data">
             @csrf

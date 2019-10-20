@@ -17,6 +17,8 @@ class PatientDataPatient extends Migration
           $table->bigIncrements('id');
           $table->unsignedBigInteger('patient_id');
           $table->unsignedBigInteger('patient_data_id');
+          $table->datetime('date_plan');
+          $table->datetime('date_fact');
           $table->timestamp('created_at')->useCurrent();
           $table->timestamp('updated_at')->useCurrent();
       });

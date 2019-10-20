@@ -85,8 +85,8 @@ class DiseaseController extends Controller
 
     public function edit(Disease $disease)
     {
-      $symptoms = Symptom::all();
-      $treatments = Treatment::all();
+      $symptoms = $disease->symptoms;
+      $treatments = $disease->treatments;
 
       return view('editDisease', [
         'disease' => $disease,
@@ -101,25 +101,39 @@ class DiseaseController extends Controller
         'name' => '',
         'description' => '',
       ]);
-      $symptomDataArray = request()->validate([
-        'symptom_id_array' => '',
+      $symptoms = request()->validate([
+        'symptom_array' => '',
+        'unit_of_measure' => '',
       ]);
-      $treatmentDataArray = request()->validate([
-        'treatment_id_array' => '',
+      $treatments = request()->validate([
+        'treatment_array' => '',
       ]);
+      
       $disease->update($diseaseData);
 
-      foreach($symptomDataArray as $symptomData)
+      $symptomData = [];
+
+      for($i = 0; $i < count($symptoms['symptom_array']); $i++)
       {
+        $symptomData['name'] = $symptoms['symptom_array'][$i];
+        $symptomData['description'] = '';
+        $symptomData['unit_of_measure'] = $symptoms['unit_of_measure'][$i];
+
+        $newSymptom = Symptom::create($symptomData);
         DB::table('symptom_diseases')
-                  ->where('disease_id', '=', $disease->id)
-                  ->update(['symptom_id' => intval($symptomData)]);
+            ->where('disease_id', '=', $disease->id)
+            ->updateOrInsert(['symptom_id' => $newTreatment->id]);
       }
-      foreach($treatmentDataArray as $treatmentData)
+
+      for($i = 0; $i < count($treatments['treatment_array']); $i++)
       {
+        $treatmentData['name'] = $treatments['treatment_array'][$i];
+        $treatmentData['description'] = '';
+
+        $newTreatment = Treatment::createOrUpdate($treatmentData);
         DB::table('treatment_diseases')
-                  ->where('disease_id', '=', $disease->id)
-                  ->update(['treatment_id' => intval($treatmentData)]);
+            ->where('disease_id', '=', $disease->id)
+            ->updateOrInsert(['treatment_id' => $newTreatment->id]);
       }
 
       $diseases = Disease::all();
