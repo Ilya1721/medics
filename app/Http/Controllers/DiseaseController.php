@@ -40,26 +40,38 @@ class DiseaseController extends Controller
         'description' => '',
       ]);
 
-      Disease::create($disease);
+      $disease = Disease::create($disease);
 
       $symptoms = request()->validate([
-        'symptom_id_array' => '',
+        'symptom_array' => '',
+        'unit_of_measure' => '',
       ]);
       $treatments = request()->validate([
-        'treatment_id_array' => '',
+        'treatment_array' => '',
       ]);
-      $disease_id = Disease::max('id');
 
-      foreach($symptoms as $symptom)
+      $symptomData = [];
+
+      for($i = 0; $i < count($symptoms['symptom_array']); $i++)
       {
+        $symptomData['name'] = $symptoms['symptom_array'][$i];
+        $symptomData['description'] = '';
+        $symptomData['unit_of_measure'] = $symptoms['unit_of_measure'][$i];
+
+        $newSymptom = Symptom::create($symptomData);
         DB::table('symptom_diseases')->insertOrIgnore([
-          ['symptom_id' => intval($symptom), 'disease_id' => $disease_id],
+          ['symptom_id' => $newSymptom->id, 'disease_id' => $disease->id],
         ]);
       }
-      foreach($treatments as $treatment)
+
+      for($i = 0; $i < count($treatments['treatment_array']); $i++)
       {
+        $treatmentData['name'] = $treatments['treatment_array'][$i];
+        $treatmentData['description'] = '';
+
+        $newTreatment = Treatment::create($treatmentData);
         DB::table('treatment_diseases')->insertOrIgnore([
-          ['treatment_id' => intval($treatment), 'disease_id' => $disease_id],
+          ['treatment_id' => $newTreatment->id, 'disease_id' => $disease->id],
         ]);
       }
 
