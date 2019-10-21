@@ -53,10 +53,10 @@
                 </div>
                 <div class="row mt-2">
                   <div class="col">
-                    <button class="btn btn-info" onClick="Symptom.moreSymptoms()">Більше симптомів</button>
+                    <button class="btn btn-info" type="button" onClick="moreSymptoms()">Більше симптомів</button>
                   </div>
                   <div class="col">
-                    <button class="btn btn-danger" onClick="Symptom.lessSymptoms()">Менше симптомів</button>
+                    <button class="btn btn-danger" type="button" onClick="lessSymptoms({{ count($symptoms) }})">Менше симптомів</button>
                   </div>
                 </div>
                 @error('symptom_array')
@@ -79,10 +79,10 @@
                 </div>
                 <div class="row mt-2">
                   <div class="col">
-                    <button class="btn btn-info" onClick="Treatment.moreTreatments()">Більше лікувань</button>
+                    <button class="btn btn-info" type="button" onClick="moreTreatments()">Більше лікувань</button>
                   </div>
                   <div class="col">
-                    <button class="btn btn-danger" onClick="Treatment.lessTreatments()">Менше лікувань</button>
+                    <button class="btn btn-danger" type="button" onClick="lessTreatments({{ count($treatments) }})">Менше лікувань</button>
                   </div>
                 </div>
                   @error('treatment_id_array')
@@ -107,14 +107,7 @@
   </div>
 </div>
 <script>
-class Symptom
-{
-  constructor(count)
-  {
-    this.count = 0;
-  }
-
-  static moreSymptoms()
+  function moreSymptoms()
   {
     var input = document.createElement('input');
     input.className = "form-control @error('symptom_array') is-invalid @enderror mt-2";
@@ -140,32 +133,20 @@ class Symptom
     var div = document.getElementById('symptoms')
     div.appendChild(input);
     div.appendChild(unit);
-
-    this.count++;
   }
 
-  static lessSymptoms()
+  function lessSymptoms(symptomCount)
   {
-    var input = document.getElementById('symptom_array');
-    var unit = document.getElementById('unit_of_measure');
-    input.remove();
-    unit.remove();
-
-    if(this.count != 0)
+    if(document.getElementById('symptoms').childElementCount / 2 > symptomCount)
     {
-      this.count--;
+      var input = document.getElementById('symptoms').lastChild;
+      input.remove();
+      var unit = document.getElementById('symptoms').lastChild;
+      unit.remove();
     }
   }
-}
 
-class Treatment
-{
-  constructor(count)
-  {
-    this.count = 0;
-  }
-
-  static moreTreatments()
+  function moreTreatments()
   {
     var input = document.createElement('input');
     input.className = "form-control @error('treatment_array') is-invalid @enderror mt-2";
@@ -179,18 +160,16 @@ class Treatment
 
     var div = document.getElementById('treatments')
     div.appendChild(input);
-    this.count++;
   }
 
-  static lessTreatments()
+  function lessTreatments(treatmentCount)
   {
-    var input = document.getElementById('treatment_array');
-    input.remove();
-    if(this.count != 0)
+    if(document.getElementById('treatments').childElementCount > treatmentCount)
     {
-      this.count--;
+      var input = document.getElementById('treatments').lastChild;
+      input.remove();
     }
   }
-}
+
 </script>
 @endsection
