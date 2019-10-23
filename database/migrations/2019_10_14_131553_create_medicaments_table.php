@@ -15,7 +15,6 @@ class CreateMedicamentsTable extends Migration
     {
         Schema::create('medicaments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('manufactor_id');
             $table->string('name');
             $table->string('unit_of_measure');
             $table->timestamp('created_at')->useCurrent();

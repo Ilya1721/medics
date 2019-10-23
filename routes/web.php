@@ -31,6 +31,7 @@ Route::get('/treatments/show', 'TreatmentController@index')->name('treatments.sh
 Route::get('/patient/{patient}/treatments/show', 'PatientTreatmentController@index')->name('patientTreatment.show');
 Route::get('/patient/{patient}/procedures/show', 'PatientProcedureController@index')->name('patientProcedure.show');
 Route::get('/patient/{patient}/symptoms/show', 'PatientSymptomController@index')->name('patientSymptom.show');
+Route::get('/patient/{patient}/medicaments/show', 'PatientMedicamentController@index')->name('patientMedicament.show');
 Route::get('/symptom/create', 'SymptomController@create');
 Route::post('/symptoms', 'SymptomController@store');
 Route::get('/treatment/create', 'TreatmentController@create');
@@ -54,6 +55,8 @@ Route::get('/patient/{patient}/data/create', 'PatientDataController@create');
 Route::post('/patient/{patient}/data', 'PatientDataController@store');
 Route::get('/patient/{patient}/treatment/create', 'PatientTreatmentController@create');
 Route::post('/patient/{patient}/treatment', 'PatientTreatmentController@store');
+Route::get('/patient/{patient}/medicament/create', 'PatientMedicamentController@create');
+Route::post('/patient/{patient}/medicament', 'PatientMedicamentController@store');
 Route::get('/rooms/{room}/edit', 'RoomController@edit')->name('room.edit');
 Route::patch('/rooms/{room}', 'RoomController@update')->name('room.update');
 Route::get('/home/{employee}/edit', 'EmployeeController@edit')->name('employee.edit');
@@ -77,3 +80,5 @@ Route::get('/patient/{patient}/procedure/{procedure}/edit', 'PatientProcedureCon
 Route::patch('/patient/{patient}/procedure/{procedure}', 'PatientProcedureController@update')->name('patientProcedure.update');
 Route::get('/patient/{patient}/symptom/{symptom}/edit', 'PatientSymptomController@edit')->name('patientSymptom.edit');
 Route::patch('/patient/{patient}/symptom/{symptom}', 'PatientSymptomController@update')->name('patientSymptom.update');
+Route::get('/patient/{patient}/medicament/{medicament}/edit', 'PatientMedicamentController@edit')->name('patientMedicament.edit');
+Route::patch('/patient/{patient}/medicament/{medicament}', 'PatientMedicamentController@update')->name('patientMedicament.update');

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Patient;
 use App\Procedure;
+use App\Medicament;
 
 class PatientProcedureController extends Controller
 {
@@ -51,8 +51,8 @@ class PatientProcedureController extends Controller
         'date_plan' => '',
         'amount' => 'required',
       ]);
-      $procedure = Procedure::create($procedureData);
-      DB::table('patient_procedure')->insertOrIgnore([
+      $procedure = Procedure::updateOrCreate($procedureData);
+      DB::table('patient_procedure')->updateOrInsert([
         'patient_id' => $patient, 'procedure_id' => $procedure->id,
         'date_plan' => $pivotData['date_plan'], 'date_fact' => $pivotData['date_plan'],
         'amount' => $pivotData['amount'],

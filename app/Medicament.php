@@ -8,9 +8,9 @@ class Medicament extends Model
 {
     protected $guarded = [];
 
-    public function manufactor()
+    public function manufactors()
     {
-      return $this->belongsTo(Manufactor::class);
+      return $this->belongsToMany(Manufactor::class, 'medicament_manufactor');
     }
 
     public function patients()

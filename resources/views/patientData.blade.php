@@ -17,6 +17,9 @@
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptom/create">
           <span class="mx-5">Вказати симптом</span>
         </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/medicament/create">
+          <span class="mx-4">Назначити медикамент</span>
+        </a>
       </div>
     </div>
     <div class="col-6">
@@ -30,6 +33,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ $patientData->name }}</h5>
               <p class="card-text">{{ $patientData->value }} {{ $patientData->unit_of_measure }}</p>
+              <p class="card-text">Дата призначення: {{ $date_plan }}</p>
               <a class="card-text btn btn-primary text-right" role="button"
                href="/patient/{{ $patient->id }}/data/{{ $patientData->id}}/edit">
                Редактувати
@@ -54,6 +58,9 @@
         </a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptoms/show">
           <span class="mx-5">Симптоми</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/medicaments/show">
+          <span class="mx-5">Медикаменти</span>
         </a>
       </div>
     </div>

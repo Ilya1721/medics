@@ -45,8 +45,8 @@ class PatientTreatmentController extends Controller
       $date = request()->validate([
         'date_plan' => '',
       ]);
-      $treatment = Treatment::create($treatmentData);
-      DB::table('patient_treatment')->insertOrIgnore([
+      $treatment = Treatment::updateOrCreate($treatmentData);
+      DB::table('patient_treatment')->updateOrInsert([
         'patient_id' => $patient, 'treatment_id' => $treatment->id,
         'date_plan' => $date['date_plan'], 'date_fact' => $date['date_plan'],
       ]);

@@ -35,12 +35,15 @@ class DiseaseController extends Controller
 
     public function store()
     {
-      $disease = request()->validate([
+      $diseaseData = request()->validate([
         'name' => 'required',
         'description' => '',
       ]);
 
-      $disease = Disease::create($disease);
+      $disease = Disease::updateOrCreate(
+        ['name' => $diseaseData['name']],
+        $diseaseData,
+      );
 
       $symptoms = request()->validate([
         'symptom_array' => '',
@@ -58,10 +61,13 @@ class DiseaseController extends Controller
         $symptomData['description'] = '';
         $symptomData['unit_of_measure'] = $symptoms['unit_of_measure'][$i];
 
-        $newSymptom = Symptom::create($symptomData);
-        DB::table('symptom_diseases')->insertOrIgnore([
+        $newSymptom = Symptom::updateOrCreate(
+          ['name' => $symptomData['name']],
+          $symptomData,
+        );
+        DB::table('symptom_diseases')->updateOrInsert(
           ['symptom_id' => $newSymptom->id, 'disease_id' => $disease->id],
-        ]);
+        );
       }
 
       for($i = 0; $i < count($treatments['treatment_array']); $i++)
@@ -69,10 +75,13 @@ class DiseaseController extends Controller
         $treatmentData['name'] = $treatments['treatment_array'][$i];
         $treatmentData['description'] = '';
 
-        $newTreatment = Treatment::create($treatmentData);
-        DB::table('treatment_diseases')->insertOrIgnore([
+        $newTreatment = Treatment::updateOrCreate(
+          ['name' => $treatmentData['name']],
+          $treatmentData,
+        );
+        DB::table('treatment_diseases')->updateOrInsert(
           ['treatment_id' => $newTreatment->id, 'disease_id' => $disease->id],
-        ]);
+        );
       }
 
       $diseases = Disease::all();
@@ -119,10 +128,11 @@ class DiseaseController extends Controller
         $symptomData['description'] = '';
         $symptomData['unit_of_measure'] = $symptoms['unit_of_measure'][$i];
 
-        $newSymptom = Symptom::updateOrCreate($symptomData);
-        $newSymptom->save();
+        $newSymptom = Symptom::updateOrCreate(
+          ['name' => $symptomData['name']],
+          $symptomData,
+        );
         DB::table('symptom_diseases')
-            ->where('disease_id', '=', $disease->id)
             ->updateOrInsert(['symptom_id' => $newSymptom->id,
                               'disease_id' => $disease->id]);
       }
@@ -132,10 +142,11 @@ class DiseaseController extends Controller
         $treatmentData['name'] = $treatments['treatment_array'][$i];
         $treatmentData['description'] = '';
 
-        $newTreatment = Treatment::updateOrCreate($treatmentData);
-        $newTreatment->save();
+        $newTreatment = Treatment::updateOrCreate(
+          ['name' => $treatmentData['name']],
+          $treatmentData,
+        );
         DB::table('treatment_diseases')
-            ->where('disease_id', '=', $disease->id)
             ->updateOrInsert(['treatment_id' => $newTreatment->id,
                               'disease_id' => $disease->id]);
       }

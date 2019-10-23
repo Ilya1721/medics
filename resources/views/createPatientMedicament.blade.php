@@ -5,16 +5,16 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Вказати показник') }}</div>
+        <div class="card-header">{{ __('Назначити процедуру') }}</div>
         <div class="card-body">
-          <form method="POST" action="/patient/{{ $patient->id }}/data">
+          <form method="POST" action="/patient/{{ $patient->id }}/medicament">
             @csrf
 
             <div class="form-group row">
               <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Назва') }}</label>
 
               <div class="col-md-6">
-                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" description="{{ old('name') }}" required autocomplete="name" autofocus>
 
                   @error('name')
                       <span class="invalid-feedback" role="alert">
@@ -25,12 +25,12 @@
             </div>
 
             <div class="form-group row">
-              <label for="value" class="col-md-4 col-form-label text-md-right">{{ __('Значення') }}</label>
+              <label for="amount" class="col-md-4 col-form-label text-md-right">{{ __('Кількість') }}</label>
 
               <div class="col-md-6">
-                  <input id="value" type="name" class="form-control @error('value') is-invalid @enderror" name="value" value="{{ old('value') }}" required autocomplete="value" autofocus>
+                  <input id="amount" type="text" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required autocomplete="amount" autofocus>
 
-                  @error('value')
+                  @error('amount')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
@@ -39,10 +39,10 @@
             </div>
 
             <div class="form-group row">
-              <label for="unit_of_measure" class="col-md-4 col-form-label text-md-right">{{ __('Одиниця вимірювання') }}</label>
+              <label for="unit_of_measure" class="col-md-4 col-form-label text-md-right">{{ __('Одиниця виміру') }}</label>
 
               <div class="col-md-6">
-                  <input id="unit_of_measure" type="name" class="form-control @error('unit_of_measure') is-invalid @enderror" name="unit_of_measure" value="{{ old('unit_of_measure') }}" required autocomplete="unit_of_measure" autofocus>
+                  <input id="unit_of_measure" type="text" class="form-control @error('unit_of_measure') is-invalid @enderror" name="unit_of_measure" value="{{ old('unit_of_measure') }}" required autocomplete="unit_of_measure" autofocus>
 
                   @error('unit_of_measure')
                       <span class="invalid-feedback" role="alert">

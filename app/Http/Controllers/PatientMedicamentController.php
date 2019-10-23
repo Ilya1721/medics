@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Symptom;
 use App\Patient;
+use App\Medicament;
 
-class PatientSymptomController extends Controller
+class PatientMedicamentController extends Controller
 {
     public function index($patient)
     {
       $patient = Patient::find($patient);
-      $date_plan = DB::table('patient_symptom')
+      $date_plan = DB::table('patient_medicament')
                        ->where('patient_id', '=', $patient->id)
                        ->value('date_plan');
-      $date_fact = DB::table('patient_symptom')
+      $date_fact = DB::table('patient_medicament')
                        ->where('patient_id', '=', $patient->id)
                        ->value('date_fact');
-      $amount = DB::table('patient_symptom')
+      $amount = DB::table('patient_medicament')
                     ->where('patient_id', '=', $patient->id)
                     ->value('amount');
 
-      return view('patientSymptom', [
+      return view('patientMedicament', [
         'patient' => $patient,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
@@ -35,74 +35,67 @@ class PatientSymptomController extends Controller
     {
       $patient = Patient::find($patient);
 
-      return view('createPatientSymptom', [
+      return view('createPatientMedicament', [
         'patient' => $patient,
       ]);
     }
 
     public function store($patient)
     {
-      $symptomData = request()->validate([
+      $medicamentData = request()->validate([
         'name' => 'required',
-        'description' => '',
         'unit_of_measure' => 'required',
       ]);
       $pivotData = request()->validate([
-        'date_plan' => '',
         'amount' => 'required',
+        'date_plan' => 'required',
       ]);
-      $symptom = Symptom::updateOrCreate($symptomData);
-      DB::table('patient_symptom')->updateOrInsert([
-        'patient_id' => $patient, 'symptom_id' => $symptom->id,
+      $medicament = Medicament::updateOrCreate($medicamentData);
+      DB::table('patient_medicament')->updateOrInsert([
+        'patient_id' => $patient, 'medicament_id' => $medicament->id,
         'date_plan' => $pivotData['date_plan'], 'date_fact' => $pivotData['date_plan'],
         'amount' => $pivotData['amount'],
       ]);
 
-      $patient = Patient::find($patient);
-
-      return redirect()->route('patientSymptom.show', [
+      return redirect()->route('patientMedicament.show', [
         'patient' => $patient,
       ]);
     }
 
-    public function edit($patient, $symptom)
+    public function edit($patient, $medicament)
     {
       $patient = Patient::find($patient);
-      $symptom = Symptom::find($symptom);
-      $amount = DB::table('patient_symptom')
+      $medicament = Medicament::find($medicament);
+      $amount = DB::table('patient_medicament')
                     ->where('patient_id', '=', $patient->id)
-                    ->where('symptom_id', '=', $symptom->id)
+                    ->where('medicament_id', '=', $medicament->id)
                     ->value('amount');
 
-      return view('editPatientSymptom', [
+      return view('editPatientMedicament', [
         'patient' => $patient,
-        'symptom' => $symptom,
+        'medicament' => $medicament,
         'amount' => $amount,
       ]);
     }
 
-    public function update($patient, $symptom)
+    public function update($patient, $medicament)
     {
-      $symptomData = request()->validate([
+      $medicamentData = request()->validate([
         'name' => 'required',
-        'description' => '',
         'unit_of_measure' => 'required',
       ]);
-      $amount = request()->validate([
+      $pivotData = request()->validate([
         'amount' => 'required',
       ]);
+      $medicament = Medicament::find($medicament);
+      $medicament->update($medicamentData);
 
-      $symptom = Symptom::find($symptom);
-      $symptom->update($symptomData);
-
-      DB::table('patient_symptom')
+      DB::table('patient_medicament')
           ->where('patient_id', '=', $patient)
-          ->where('symptom_id', '=', $symptom->id)
-          ->update(['amount' => $amount['amount'] ]);
+          ->where('medicament_id', '=', $medicament->id)
+          ->update(['amount' => $pivotData['amount']]);
 
-      $patient = Patient::find($patient);
-
-      return redirect()->route('patientSymptom.show', [
+      return redirect()->route('patientMedicament.show', [
         'patient' => $patient,
       ]);
     }

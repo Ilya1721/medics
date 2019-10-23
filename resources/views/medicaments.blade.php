@@ -19,7 +19,9 @@
               <p class="card-title font-weight-bold">Одиниця вимірювання:</p>
               <p class="card-text">{{ $medicament->unit_of_measure }}</p>
               <p class="card-title font-weight-bold">Виробник:</p>
-              <p class="card-text">{{ $medicament->manufactor->name}},  {{ $medicament->manufactor->country->name}}</p>
+              @foreach($medicament->manufactors as $manufactor)
+              <p class="card-text">{{ $manufactor->name}},  {{ $manufactor->country->name}}</p>
+              @endforeach
               <a class="card-text btn btn-primary text-right" role="button" href="/medicaments/{{ $medicament->id }}/edit">Редактувати</a>
             </div>
           </div>

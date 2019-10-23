@@ -7,6 +7,8 @@ use App\City;
 use App\Job;
 use App\Department;
 use App\Employee;
+use App\Country;
+use App\Clinic;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -56,9 +58,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'city_id' => ['required'],
-            'department_id' => ['required'],
-            'job_id' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'department' => ['required'],
+            'clinic_id' => ['required'],
+            'job' => ['required'],
             'last_name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'father_name' => ['required', 'string', 'max:255'],
@@ -77,10 +81,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $country = Country::updateOrCreate(
+          ['name' => $data['country'] ],
+          ['name' => $data['country'] ]
+        );
+        $cityData = [];
+        $cityData['name'] = $data['city'];
+        $cityData['country_id'] = $country->id;
+        $city = City::updateOrCreate(
+          ['name' => $cityData['name'] ],
+          ['name' => $cityData['name'],
+           'country_id' => $country->id],
+        );
+        $job = Job::updateOrCreate(
+          ['name' => $data['job'] ],
+          ['name' => $data['job'] ],
+        );
+        $clinic_id = $data['clinic_id'];
+        $departmentData = [];
+        $departmentData['name'] = $data['department'];
+        $departmentData['clinic_id'] = $clinic_id;
+        $department = Department::updateOrCreate(
+          ['name' => $departmentData['name'],
+           'clinic_id' => $departmentData['clinic_id']],
+          ['name' => $departmentData['name'],
+           'clinic_id' => $departmentData['clinic_id']],
+        );
+
         $employee = Employee::create([
-          'city_id' => $data['city_id'],
-          'department_id' => $data['department_id'],
-          'job_id' => $data['job_id'],
+          'city_id' => $city->id,
+          'department_id' => $department->id,
+          'job_id' => $job->id,
           'last_name' => $data['last_name'],
           'first_name' => $data['first_name'],
           'father_name' => $data['father_name'],
@@ -100,14 +131,10 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-      $cities = City::all();
-      $jobs = Job::all();
-      $departments = Department::all();
+      $clinics = Clinic::all();
 
       return view('/auth/register', [
-        'departments' => $departments,
-        'jobs' => $jobs,
-        'cities' => $cities,
+        'clinics' => $clinics,
       ]);
     }
 }

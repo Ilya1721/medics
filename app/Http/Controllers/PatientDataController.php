@@ -27,11 +27,16 @@ class PatientDataController extends Controller
         'value' => 'required',
         'unit_of_measure' => 'required',
       ]);
-
-      $patientData = PatientData::create($data);
-      DB::table('patient_data_patient')->insertOrIgnore([
-        'patient_id' => $patient, 'patient_data_id' => $patientData->id,
+      $date = request()->validate([
+        'date_plan' => '',
       ]);
+
+      $patientData = PatientData::updateOrCreate($data);
+      DB::table('patient_data_patient')->updateOrInsert(
+        ['patient_id' => $patient, 'patient_data_id' => $patientData->id,
+         'patient_id' => $patient, 'patient_data_id' => $patientData->id,
+         'date_plan' => $date['date_plan'], 'date_fact' => $date['date_plan'], ]
+      );
 
       return redirect()->route('patient.show', [
         'patient' => $patient,

@@ -17,6 +17,9 @@
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptom/create">
           <span class="mx-5">Вказати симптом</span>
         </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/medicament/create">
+          <span class="mx-4">Назначити медикамент</span>
+        </a>
       </div>
     </div>
     <div class="col-6">
@@ -56,6 +59,9 @@
         </a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedures/show">
           <span class="mx-5">Процедури</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/medicaments/show">
+          <span class="mx-5">Медикаменти</span>
         </a>
       </div>
     </div>

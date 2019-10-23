@@ -39,14 +39,24 @@
             </div>
 
             <div class="form-group row">
-              <label for="manufactor_id" class="col-md-4 col-form-label text-md-right">{{ __('Виробник') }}</label>
+              <label for="manufactor" class="col-md-4 col-form-label text-md-right">{{ __('Виробник') }}</label>
+
               <div class="col-md-6">
-                  <select id="manufactor_id" class="form-control" @error('manufactor_id') is-invalid @enderror name="manufactor_id" required autofocus>
-                    @foreach($manufactors as $manufactor)
-                    <option value={{ $manufactor->id }}>{{ $manufactor->name }}, {{ $manufactor->country->name }}</option>
-                    @endforeach
-                  </select>
-                  @error('manufactor_id')
+                <div id="manufactors">
+                  <input id="manufactor" type="text" class="form-control @error('manufactor') is-invalid @enderror"
+                   name="manufactor[]" description="{{ old('manufactor') }}" required autocomplete="manufactor" autofocus>
+                  <input id="country" type="text" class="mt-2 form-control @error('country') is-invalid @enderror"
+                   name="country[]" description="{{ old('country') }}" required autocomplete="country" autofocus placeholder="Країна">
+                </div>
+                <div class="row mt-2">
+                  <div class="col">
+                    <button class="btn btn-info" onClick="moreManufactors()" type="button">Більше виробників</button>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-danger" onClick="lessManufactors()" type="button">Менше виробників</button>
+                  </div>
+                </div>
+                  @error('name')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
@@ -67,4 +77,44 @@
     </div>
   </div>
 </div>
+<script>
+  function moreManufactors()
+  {
+    var manufactor = document.createElement('input');
+    manufactor.className = "form-control @error('manufactor') is-invalid @enderror mt-2";
+    manufactor.id = "manufactor";
+    manufactor.type = "text";
+    manufactor.setAttribute("name", "manufactor[]");
+    manufactor.setAttribute("required", "required");
+    manufactor.setAttribute("value", "{{ old('manufactor') }}");
+    manufactor.setAttribute("autocomplete", "manufactor");
+    manufactor.setAttribute("autofocus", "autofocus");
+
+    var country = document.createElement('input');
+    country.className = "form-control @error('country') is-invalid @enderror mt-2";
+    country.id = "country";
+    country.type = "text";
+    country.setAttribute("name", "country[]");
+    country.setAttribute("required", "required");
+    country.setAttribute("value", "{{ old('country') }}");
+    country.setAttribute("autocomplete", "country");
+    country.setAttribute("autofocus", "autofocus");
+    country.setAttribute("placeholder", "Країна");
+
+    var div = document.getElementById('manufactors')
+    div.appendChild(manufactor);
+    div.appendChild(country);
+  }
+
+  function lessManufactors()
+  {
+    if(document.getElementById('manufactors').childElementCount / 2 > 1)
+    {
+      var country = document.getElementById('manufactors').lastChild;
+      country.remove();
+      var manufactor = document.getElementById('manufactors').lastChild;
+      manufactor.remove();
+    }
+  }
+</script>
 @endsection

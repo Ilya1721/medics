@@ -37,7 +37,7 @@ class RoomController extends Controller
         'department_id' => '',
       ]);
 
-      Room::create($data);
+      Room::updateOrCreate($data);
       $rooms = Room::all();
 
       return redirect()->route('rooms.show', [

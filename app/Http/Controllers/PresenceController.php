@@ -61,11 +61,11 @@ class PresenceController extends Controller
         'phone_number' => 'required',
       ]);
 
-      \App\Patient::create($patientData);
+      $patient = Patient::create($patientData);
 
-      $presenceData['patient_id'] = \App\Patient::max('id');
+      $presenceData['patient_id'] = $patient->id;
 
-      \App\Presence::create($presenceData);
+      Presence::create($presenceData);
 
       $presences = Presence::all();
 

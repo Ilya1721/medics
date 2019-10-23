@@ -31,7 +31,7 @@ class SymptomController extends Controller
         'description' => '',
       ]);
 
-      Symptom::create($data);
+      Symptom::updateOrCreate($data);
 
       $symptoms = Symptom::all();
 

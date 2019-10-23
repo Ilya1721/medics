@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Manufactor;
 use App\Medicament;
+use App\Country;
 
 class MedicamentController extends Controller
 {
@@ -34,10 +36,37 @@ class MedicamentController extends Controller
       $medicaments = request()->validate([
         'name' => 'required',
         'unit_of_measure' => 'required',
-        'manufactor_id' => ' ',
+      ]);
+      $manufactors = request()->validate([
+        'manufactor' => '',
+        'country' => '',
       ]);
 
-      \App\Medicament::create($medicaments);
+      $medicament = Medicament::updateOrCreate(
+        ['name' => $medicaments['name']],
+        $medicaments,
+      );
+      $manufactorData = [];
+      $countryData = [];
+
+      for($i = 0; $i < count($manufactors['manufactor']); $i++)
+      {
+        $manufactorData['name'] = $manufactors['manufactor'][$i];
+        $countryData['name'] = $manufactors['country'][$i];
+        $country = Country::updateOrCreate(
+          ['name' => $countryData['name']],
+          $countryData,
+        );
+        $manufactorData['country_id'] = $country->id;
+        $manufactor = Manufactor::updateOrCreate(
+          ['name' => $manufactorData['name']],
+          $manufactorData,
+        );
+
+        DB::table('medicament_manufactor')
+            ->updateOrInsert(['manufactor_id' => $manufactor->id,
+                              'medicament_id' => $medicament->id]);
+      }
 
       $medicaments = Medicament::all();
 

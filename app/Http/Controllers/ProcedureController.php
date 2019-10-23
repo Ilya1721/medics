@@ -32,7 +32,7 @@ class ProcedureController extends Controller
         'description' => '',
       ]);
 
-      \App\Procedure::create($procedures);
+      Procedure::updateOrCreate($procedures);
 
       $procedures = Procedure::all();
 

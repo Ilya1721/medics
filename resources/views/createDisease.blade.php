@@ -50,10 +50,10 @@
                 </div>
                 <div class="row mt-2">
                   <div class="col">
-                    <button class="btn btn-info" onClick="moreSymptoms()">Більше симптомів</button>
+                    <button class="btn btn-info" type="button" onClick="moreSymptoms()">Більше симптомів</button>
                   </div>
                   <div class="col">
-                    <button class="btn btn-danger" onClick="lessSymptoms()">Менше симптомів</button>
+                    <button class="btn btn-danger" type="button" onClick="lessSymptoms()">Менше симптомів</button>
                   </div>
                 </div>
                 @error('symptom_array')
@@ -73,10 +73,10 @@
                 </div>
                 <div class="row mt-2">
                   <div class="col">
-                    <button class="btn btn-info" onClick="moreTreatments()">Більше лікувань</button>
+                    <button class="btn btn-info" type="button" onClick="moreTreatments()">Більше лікувань</button>
                   </div>
                   <div class="col">
-                    <button class="btn btn-danger" onClick="lessTreatments()">Менше лікувань</button>
+                    <button class="btn btn-danger" type="button" onClick="lessTreatments()">Менше лікувань</button>
                   </div>
                 </div>
                   @error('treatment_id_array')
@@ -131,10 +131,13 @@
 
   function lessSymptoms()
   {
-    var input = document.getElementById('symptom_array');
-    var unit = document.getElementById('unit_of_measure');
-    input.remove();
-    unit.remove();
+    if(document.getElementById('symptoms').childElementCount / 2 > 2)
+    {
+      var input = document.getElementById('symptoms').lastChild;
+      input.remove();
+      var unit = document.getElementById('symptoms').lastChild;
+      unit.remove();
+    }
   }
 
   function moreTreatments()
@@ -155,8 +158,11 @@
 
   function lessTreatments()
   {
-    var input = document.getElementById('treatment_array');
-    input.remove();
+    if(document.getElementById('treatments').childElementCount > 1)
+    {
+      var input = document.getElementById('treatments').lastChild;
+      input.remove();
+    }
   }
 </script>
 @endsection

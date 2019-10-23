@@ -68,19 +68,33 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="city_id" class="col-md-4 col-form-label text-md-right">{{ __('Місто') }}</label>
-                          <div class="col-md-6">
-                            <select id="city_id" class="form-control" @error('city_id') is-invalid @enderror name="city_id" required autofocus>
-                              @foreach($cities as $city)
-                              <option value={{ $city->id }}>{{ $city->name }}</option>
-                              @endforeach
-                            </select>
-                              @error('city_id')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                              @enderror
-                          </div>
+                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Місто') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror"
+                                 name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Країна') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="country" type="text" class="form-control @error('country') is-invalid @enderror"
+                                 name="country" value="{{ old('city') }}" required autocomplete="country" autofocus>
+
+                                @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -140,14 +154,14 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="job_id" class="col-md-4 col-form-label text-md-right">{{ __('Посада') }}</label>
+                          <label for="clinic_id" class="col-md-4 col-form-label text-md-right">{{ __('Клініка') }}</label>
                           <div class="col-md-6">
-                              <select id="job_id" class="form-control" @error('job_id') is-invalid @enderror name="job_id" required autofocus>
-                                @foreach($jobs as $job)
-                                <option value={{ $job->id }}>{{ $job->name }}</option>
+                              <select id="clinic_id" class="form-control" @error('clinic_id') is-invalid @enderror name="clinic_id" required autofocus>
+                                @foreach($clinics as $clinic)
+                                <option value={{ $clinic->id }}>{{ $clinic->name }}</option>
                                 @endforeach
                               </select>
-                              @error('job_id')
+                              @error('clinic_id')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>
                                   </span>
@@ -156,19 +170,33 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="department_id" class="col-md-4 col-form-label text-md-right">{{ __('Відділ') }}</label>
-                          <div class="col-md-6">
-                              <select id="department_id" class="form-control" @error('department_id') is-invalid @enderror name="department_id" required autofocus>
-                                @foreach($departments as $department)
-                                <option value={{ $department->id }}>{{ $department->name }}</option>
-                                @endforeach
-                              </select>
-                              @error('department_id')
-                                  <span class="invalid-feedback" role="alert">
-                                      <strong>{{ $message }}</strong>
-                                  </span>
-                              @enderror
-                          </div>
+                            <label for="job" class="col-md-4 col-form-label text-md-right">{{ __('Посада') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="job" type="text" class="form-control @error('job') is-invalid @enderror"
+                                 name="job" value="{{ old('job') }}" required autocomplete="job" autofocus>
+
+                                @error('job')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Відділ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="department" type="text" class="form-control @error('department') is-invalid @enderror"
+                                 name="department" value="{{ old('department') }}" required autocomplete="department" autofocus>
+
+                                @error('department')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group row">

@@ -31,7 +31,7 @@ class TreatmentController extends Controller
         'description' => '',
       ]);
 
-      Treatment::create($data);
+      Treatment::updateOrCreate($data);
       $treatments = Treatment::all();
 
       return redirect()->route('treatments.show', [

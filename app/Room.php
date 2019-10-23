@@ -12,4 +12,9 @@ class Room extends Model
     {
       return $this->belongsTo(Department::class);
     }
+
+    public function presences()
+    {
+      return $this->hasMany(Presence::class);
+    }
 }
