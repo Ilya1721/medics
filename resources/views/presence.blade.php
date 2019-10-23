@@ -37,10 +37,16 @@
         Дата виписки: {{ $presence->departure_at }}
       </div>
       <div class="col text-center">
-        Адреса: {{ $presence->patient->street }} {{ $presence->patient->house }} {{ $presence->patient->city->name }}
+        Адреса: {{ $presence->patient->street }} {{ $presence->patient->house }} кв.{{ $presence->patient->flat}} м.{{ $presence->patient->city->name }}
       </div>
       <div class="col">
         Номер телефону: {{ $presence->patient->phone_number }}
+      </div>
+    </div>
+    <div class="row my-3 text-center">
+      <div class="col">
+        <a class="btn btn-info mx-1" href="/presence/{{ $presence->id }}/edit">Редагувати</a>
+        <a class="btn btn-danger mx-1" href="#">Видалити</a>
       </div>
     </div>
   </div>

@@ -82,3 +82,5 @@ Route::get('/patient/{patient}/symptom/{symptom}/edit', 'PatientSymptomControlle
 Route::patch('/patient/{patient}/symptom/{symptom}', 'PatientSymptomController@update')->name('patientSymptom.update');
 Route::get('/patient/{patient}/medicament/{medicament}/edit', 'PatientMedicamentController@edit')->name('patientMedicament.edit');
 Route::patch('/patient/{patient}/medicament/{medicament}', 'PatientMedicamentController@update')->name('patientMedicament.update');
+Route::get('/presence/{presence}/edit', 'PresenceController@edit')->name('presence.edit');
+Route::patch('/presence/{presence}', 'PresenceController@update')->name('presence.update');

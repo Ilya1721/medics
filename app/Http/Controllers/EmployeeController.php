@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Department;
 use App\Job;
 use App\Employee;
@@ -30,16 +31,28 @@ class EmployeeController extends Controller
         'city_id' => '',
         'job_id' => '',
         'department_id' => '',
-        'street' => '',
-        'house' => '',
-        'flat' => '',
-        'phone_number' => '',
-        'last_name' => '',
-        'first_name' => '',
-        'father_name' => '',
+        'street' => 'required',
+        'house' => 'required',
+        'flat' => 'required',
+        'phone_number' => 'required',
+        'last_name' => 'required',
+        'first_name' => 'required',
+        'father_name' => 'required',
+        'image' => 'image',
       ]);
 
-      $employee->update($data);
+      if(request('image'))
+      {
+        $imagePath = request('image')->store('uploads', 'public');
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(125, 150);
+        $image->save();
+        $imageArray = ['image' => $imagePath];
+      }
+
+      $employee->update(array_merge(
+        $data,
+        $imageArray ?? []
+      ));
 
       return redirect()->route('home.show');
     }

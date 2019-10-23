@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/register">
+                    <form method="POST" action="/register" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -192,6 +192,20 @@
                                  name="department" value="{{ old('department') }}" required autocomplete="department" autofocus>
 
                                 @error('department')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Фото') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="image" type="file" class="form-control-file" name="image">
+
+                                @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

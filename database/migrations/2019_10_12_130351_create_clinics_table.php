@@ -22,6 +22,7 @@ class CreateClinicsTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('type')->nullable();
             $table->string('schedule')->nullable();
+            $table->string('image')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

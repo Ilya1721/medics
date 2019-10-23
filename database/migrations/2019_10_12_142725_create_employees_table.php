@@ -25,6 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->string('house')->nullable();
             $table->string('flat')->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('image')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

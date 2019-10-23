@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -70,6 +71,7 @@ class RegisterController extends Controller
             'house' => ['required', 'string', 'max:255'],
             'flat' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:255'],
+            'image' => ['image'],
         ]);
     }
 
@@ -107,6 +109,9 @@ class RegisterController extends Controller
           ['name' => $departmentData['name'],
            'clinic_id' => $departmentData['clinic_id']],
         );
+        $imagePath = $data['image']->store('uploads', 'public');
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(125, 150);
+        $image->save();
 
         $employee = Employee::create([
           'city_id' => $city->id,
@@ -119,6 +124,7 @@ class RegisterController extends Controller
           'house' => $data['house'],
           'flat' => $data['flat'],
           'phone_number' => $data['phone_number'],
+          'image' => $imagePath,
         ]);
 
         return User::create([

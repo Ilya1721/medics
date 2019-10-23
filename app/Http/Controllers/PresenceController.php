@@ -73,4 +73,43 @@ class PresenceController extends Controller
         'presences' => $presences,
       ]);
     }
+
+    public function edit(Presence $presence)
+    {
+      $rooms = Room::all();
+      $doctors = Employee::query()
+                 ->join('jobs', 'jobs.id', '=', 'employees.job_id')
+                 ->where('jobs.name', 'Лікар')->get();
+      $cities = City::all();
+
+      return view('editPresence', [
+        'presence' => $presence,
+        'rooms' => $rooms,
+        'doctors' => $doctors,
+        'cities' => $cities,
+      ]);
+    }
+
+    public function update(Presence $presence)
+    {
+      $presenceData = request()->validate([
+        'room_id' => '',
+        'doctor_id' => '',
+      ]);
+      $patientData = request()->validate([
+        'last_name' => 'required',
+        'first_name' => 'required',
+        'father_name' => 'required',
+        'city_id' => 'required',
+        'street' => 'required',
+        'house' => 'required',
+        'phone_number' => 'required',
+        'flat' => 'required',
+      ]);
+
+      $presence->update($presenceData);
+      $presence->patient->update($patientData);
+
+      return redirect()->route('presence.show');
+    }
 }
