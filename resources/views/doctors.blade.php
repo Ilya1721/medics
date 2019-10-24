@@ -55,7 +55,7 @@
               {{ $doctor->department->clinic->name }}
             </div>
             <div class="col text-center">
-              Тривалість 10 хв.
+              {{ $doctor->department->name }} відділ
             </div>
             <div class="col">
               {{ $doctor->phone_number }}

@@ -19,7 +19,8 @@
               <p class="card-text">{{ $treatment->name }}</p>
               <p class="card-title font-weight-bold">Опис:</p>
               <p class="card-text">{{ $treatment->description }}</p>
-              <a class="card-text btn btn-primary text-right" role="button" href="/treatments/{{ $treatment->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-info text-right" role="button" href="/treatments/{{ $treatment->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-danger text-right" role="button" href="#">Видалити</a>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ class ClinicsController extends Controller
     {
       $clinics = Clinic::query()
                 ->orderBy('updated_at', 'DESC')
-                ->paginate(2);
+                ->paginate(6);
 
       return view('clinics', [
         'clinics' => $clinics,

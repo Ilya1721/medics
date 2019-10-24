@@ -48,7 +48,7 @@
         </div>
         <div class="row mt-5">
           <div class="col justify-content-left ml-2 mb-3">
-            <a class="btn btn-primary" role="button" href="/home/{{ $user->employee->id }}/edit">Редактувати</a>
+            <a class="btn btn-info" role="button" href="/home/{{ $user->employee->id }}/edit">Редактувати</a>
           </div>
         </div>
       </div>

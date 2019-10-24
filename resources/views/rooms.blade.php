@@ -21,7 +21,8 @@
               <p class="card-text">{{ $room->department->name }}</p>
               <p class="card-title font-weight-bold">Вмістимість:</p>
               <p class="card-text">{{ $room->capacity }}</p>
-              <a class="card-text btn btn-primary text-right" role="button" href="/rooms/{{ $room->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-info text-right" role="button" href="/rooms/{{ $room->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-danger text-right" role="button" href="#">Видалити</a>
             </div>
           </div>
         </div>

@@ -28,7 +28,8 @@
                   {{ $treatment->name }},
                 @endforeach
               </p>
-              <a class="card-text btn btn-primary text-right" role="button" href="/diseases/{{ $disease->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-info text-right" role="button" href="/diseases/{{ $disease->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-danger text-right" role="button" href="#">Видалити</a>
             </div>
           </div>
         </div>

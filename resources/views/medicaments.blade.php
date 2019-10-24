@@ -22,7 +22,8 @@
               @foreach($medicament->manufactors as $manufactor)
               <p class="card-text">{{ $manufactor->name}},  {{ $manufactor->country->name}}</p>
               @endforeach
-              <a class="card-text btn btn-primary text-right" role="button" href="/medicaments/{{ $medicament->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-info text-right" role="button" href="/medicaments/{{ $medicament->id }}/edit">Редактувати</a>
+              <a class="card-text btn btn-danger text-right" role="button" href="#">Видалити</a>
             </div>
           </div>
         </div>

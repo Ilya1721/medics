@@ -49,32 +49,7 @@
             <div class="col-2">
               <p>{{ $clinic->street }}, {{ $clinic->house }}, {{ $clinic->city->name }}</p>
               <p>{{ $clinic->phone_number }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-2">
-
-            </div>
-            <div class="col-8">
-              <p class="font-weight-bold">Амбулаторії</p>
-              <hr/>
-              <p>Філіал в Поліклініці №1</p>
-              <div class="text-right">
-                Пн - Пт: <span class="font-weight-bold">08:00 - 19:00</span>
-              </div>
-              <p class="text-secondary">вулиця Подільська, 54, Хмельницький</p>
-              <hr/>
-              <p>Філіал в Поліклініці №1</p>
-              <div class="text-right">
-                Пн - Пт: <span class="font-weight-bold">08:00 - 19:00</span>
-              </div>
-              <p class="text-secondary">вулиця Подільська, 54, Хмельницький</p>
-              <hr/>
-              <p>Філіал в Поліклініці №1</p>
-              <div class="text-right">
-                Пн - Пт: <span class="font-weight-bold">08:00 - 19:00</span>
-              </div>
-              <p class="text-secondary">вулиця Подільська, 54, Хмельницький</p>
+              <p>Пн - Пт: <span class="font-weight-bold">{{ $clinic->schedule }}</span></p>
             </div>
           </div>
         </div>
