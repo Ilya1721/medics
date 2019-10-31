@@ -19,6 +19,24 @@ class TreatmentController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $treatments = Treatment::query()
+                    ->where($data['category'], 'like', '%'.$data['search'].'%')
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(6);
+
+      return view('treatments', [
+        'treatments' => $treatments,
+        'count' => 0,
+      ]);
+    }
+
     public function create()
     {
       return view('createTreatment');

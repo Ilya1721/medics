@@ -19,6 +19,24 @@ class SymptomController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $symptoms = Symptom::query()
+                  ->where($data['category'], 'like', '%'.$data['search'].'%')
+                  ->orderBy('updated_at', 'DESC')
+                  ->paginate(6);
+
+      return view('symptoms', [
+        'symptoms' => $symptoms,
+        'count' => 0,
+      ]);
+    }
+
     public function create()
     {
       return view('createSymptom');

@@ -22,6 +22,47 @@ class DiseaseController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      if($data['category'] == 'name')
+      {
+        $data['category'] = 'diseases.name';
+      }
+      else if($data['category'] == 'symptom')
+      {
+        $data['category'] = 'symptoms.name';
+      }
+      else if($data['category'] == 'treatment')
+      {
+        $data['category'] = 'treatments.name';
+      }
+
+      $diseases = Disease::query()
+                  ->join('symptom_diseases', 'symptom_diseases.disease_id',
+                         '=', 'diseases.id')
+                  ->join('symptoms', 'symptom_diseases.symptom_id',
+                         '=', 'symptoms.id')
+                  ->join('treatment_diseases', 'treatment_diseases.disease_id',
+                         '=', 'diseases.id')
+                  ->join('treatments', 'treatment_diseases.treatment_id',
+                         '=', 'treatments.id')
+                  ->where($data['category'], 'like', '%'.$data['search'].'%')
+                  ->distinct()
+                  ->select('diseases.*')
+                  ->orderBy('diseases.updated_at', 'DESC')
+                  ->paginate(6);
+
+      return view('diseases', [
+        'diseases' => $diseases,
+        'count' => 0,
+      ]);
+    }
+
     public function create()
     {
       $symptoms = Symptom::all();

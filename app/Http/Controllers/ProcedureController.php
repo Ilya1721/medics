@@ -19,6 +19,24 @@ class ProcedureController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $procedures = Procedure::query()
+                    ->where($data['category'], 'like', '%'.$data['search'].'%')
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(6);
+
+      return view('procedures', [
+        'procedures' => $procedures,
+        'count' => 0,
+      ]);
+    }
+
     public function create()
     {
       return view('createProcedure');

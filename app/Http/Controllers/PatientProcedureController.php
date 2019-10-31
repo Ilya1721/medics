@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Procedure;
 use App\Medicament;
+use App\Patient;
 
 class PatientProcedureController extends Controller
 {

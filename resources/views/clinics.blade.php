@@ -19,21 +19,44 @@
     </head>
     <body>
       <nav class="navbar navbar-light bg-light navbar-expand-lg">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link text-secondary" href="/doctors">Лікарі <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link text-secondary" href="/clinics">Клініки <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link text-secondary" href="/welcome">Головна сторінка <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
+        <div id="header" class="container">
+          <div class="row w-100">
+            <div class="col">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link text-secondary" href="/doctors">Лікарі <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link text-secondary" href="/clinics">Клініки <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link text-secondary" href="/welcome">Головна сторінка <span class="sr-only">(current)</span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <form action="/clinics/filter" method="GET" class="form-inline">
+                @csrf
+                <div class="input-group">
+                  <select name="category" class="form-control w-25">
+                    <option value="name">Назва</option>
+                    <option value="city">Місто</option>
+                    <option value="type">Тип</option>
+                  </select>
+                  <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-success" type="submit">Find<span class="glyphicon glyphicon-search"></span></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </nav>
       <div class="container mt-3">
+        <h3 class="text-center">Клініки</h3>
         @foreach($clinics as $clinic)
         <div class="card mt-3">
           <div class="row mt-2">

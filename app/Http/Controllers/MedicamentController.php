@@ -22,6 +22,39 @@ class MedicamentController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'category' => '',
+        'search' => '',
+      ]);
+
+      if($data['category'] == 'name')
+      {
+        $data['category'] = 'medicaments.'.$data['category'];
+      }
+      else if($data['category'] == 'manufactor')
+      {
+        $data['category'] = 'manufactors.name';
+      }
+
+      $medicaments = Medicament::query()
+                         ->join('medicament_manufactor', 'medicament_manufactor.medicament_id',
+                                '=', 'medicaments.id')
+                         ->join('manufactors', 'medicament_manufactor.manufactor_id',
+                                '=', 'manufactors.id')
+                         ->join('countries', 'manufactors.country_id', '=', 'countries.id')
+                         ->where($data['category'], 'like', '%'.$data['search'].'%')
+                         ->select('medicaments.*')
+                         ->orderBy('medicaments.updated_at', 'DESC')
+                         ->paginate(6);
+
+      return view('medicaments', [
+        'medicaments' => $medicaments,
+        'count' => 0,
+      ]);
+    }
+
     public function create()
     {
       $manufactors = Manufactor::all();
