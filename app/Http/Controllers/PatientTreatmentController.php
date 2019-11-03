@@ -14,16 +14,17 @@ class PatientTreatmentController extends Controller
       $patient = Patient::find($patient);
       $date_plan = DB::table('patient_treatment')
                        ->where('patient_id', '=', $patient->id)
-                       ->value('date_plan');
+                       ->select('date_plan')
+                       ->get();
       $date_fact = DB::table('patient_treatment')
                        ->where('patient_id', '=', $patient->id)
-                       ->value('date_fact');
+                       ->select('date_fact')
+                       ->get();
 
       return view('patientTreatment', [
         'patient' => $patient,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
-        'count' => 0,
       ]);
     }
 
@@ -56,7 +57,6 @@ class PatientTreatmentController extends Controller
         'patient' => $patient,
         'date_plan' => $date['date_plan'],
         'date_fact' => $date['date_plan'],
-        'count' => 0,
       ]);
     }
 
@@ -82,7 +82,6 @@ class PatientTreatmentController extends Controller
 
       return redirect()->route('patientTreatment.show', [
         'patient' => $patient,
-        'count' => 0,
       ]);
     }
 }

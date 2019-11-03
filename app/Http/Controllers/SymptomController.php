@@ -15,7 +15,6 @@ class SymptomController extends Controller
 
       return view('symptoms', [
         'symptoms' => $symptoms,
-        'count' => 0,
       ]);
     }
 
@@ -33,7 +32,6 @@ class SymptomController extends Controller
 
       return view('symptoms', [
         'symptoms' => $symptoms,
-        'count' => 0,
       ]);
     }
 

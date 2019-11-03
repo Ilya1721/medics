@@ -24,6 +24,8 @@
     </div>
     <div class="col-6">
       <h3>Останні лікування</h3>
+      @php($count = 0)
+      @php($i = 0)
       @foreach($patient->treatments as $treatment)
         @if($count % 2 == 0)
           <div class="row mt-2">
@@ -33,7 +35,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ $treatment->name }}</h5>
               <p class="card-text">{{ $treatment->description }}</p>
-              <p class="card-text">Дата призначення: {{ $date_plan }}</p>
+              <p class="card-text">Дата призначення: {{ $date_plan[$i]->date_plan }}</p>
               <a class="card-text btn btn-primary text-right" role="button"
                href="/patient/{{ $patient->id }}/treatment/{{ $treatment->id}}/edit">
                Редактувати
@@ -42,6 +44,7 @@
           </div>
         </div>
         @php($count++)
+        @php($i++)
         @if($count % 2 == 0 || $count == count($patient->treatments))
           </div>
         @endif

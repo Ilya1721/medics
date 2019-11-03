@@ -25,18 +25,11 @@ class ClinicsController extends Controller
         'search' => '',
       ]);
 
-      if($data['category'] == 'city')
-      {
-        $data['category'] = 'cities.name';
-      }
-      else
-      {
-        $data['category'] = 'clinics.'.$data['category'];
-      }
-
       $clinics = Clinic::query()
                  ->join('cities', 'clinics.city_id', '=', 'cities.id')
                  ->where($data['category'], 'like', '%'.$data['search'].'%')
+                 ->select('clinics.*')
+                 ->distinct()
                  ->orderBy('clinics.updated_at', 'DESC')
                  ->paginate(6);
 

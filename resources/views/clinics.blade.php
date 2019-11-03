@@ -41,9 +41,9 @@
                 @csrf
                 <div class="input-group">
                   <select name="category" class="form-control w-25">
-                    <option value="name">Назва</option>
-                    <option value="city">Місто</option>
-                    <option value="type">Тип</option>
+                    <option value="clinics.name">Назва</option>
+                    <option value="cities.name">Місто</option>
+                    <option value="clinics.type">Тип</option>
                   </select>
                   <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
                   <div class="input-group-append">

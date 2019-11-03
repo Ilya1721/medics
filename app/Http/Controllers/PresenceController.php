@@ -28,6 +28,27 @@ class PresenceController extends Controller
       ]);
     }
 
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $presences = Presence::query()
+                             ->join('rooms', 'rooms.id', 'presences.room_id')
+                             ->join('patients', 'patients.id', 'presences.patient_id')
+                             ->where($data['category'], 'like', '%'.$data['search'].'%')
+                             ->where('presences.doctor_id', '=', Auth::user()->employee->id)
+                             ->select('presences.*')
+                             ->distinct()
+                             ->orderBy('presences.updated_at', 'DESC')->paginate(3);
+
+      return view('presence', [
+        'presences' => $presences,
+      ]);
+    }
+
     public function create()
     {
       $rooms = Room::all();
@@ -59,6 +80,7 @@ class PresenceController extends Controller
         'street' => '',
         'house' => '',
         'phone_number' => 'required',
+        'flat' => 'required',
       ]);
 
       $patient = Patient::create($patientData);

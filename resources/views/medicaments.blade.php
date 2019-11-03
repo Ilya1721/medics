@@ -29,6 +29,7 @@
         <div class="col-4">
         </div>
       </div>
+      @php($count = 0)
       @foreach($medicaments as $medicament)
         @if($count % 2 == 0)
           <div class="row mt-2">

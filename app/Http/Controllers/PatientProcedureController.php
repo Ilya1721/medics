@@ -15,20 +15,22 @@ class PatientProcedureController extends Controller
       $patient = Patient::find($patient);
       $date_plan = DB::table('patient_procedure')
                        ->where('patient_id', '=', $patient->id)
-                       ->value('date_plan');
+                       ->select('date_plan')
+                       ->get();
       $date_fact = DB::table('patient_procedure')
                        ->where('patient_id', '=', $patient->id)
-                       ->value('date_fact');
+                       ->select('date_fact')
+                       ->get();
       $amount = DB::table('patient_procedure')
                     ->where('patient_id', '=', $patient->id)
-                    ->value('amount');
+                    ->select('amount')
+                    ->get();
 
       return view('patientProcedure', [
         'patient' => $patient,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
         'amount' => $amount,
-        'count' => 0,
       ]);
     }
 
@@ -66,7 +68,6 @@ class PatientProcedureController extends Controller
         'date_plan' => $pivotData['date_plan'],
         'date_fact' => $pivotData['date_plan'],
         'amount' => $pivotData['amount'],
-        'count' => 0,
       ]);
     }
 

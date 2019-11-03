@@ -4,6 +4,29 @@
 <div class="container">
   <h2 class="text-center mt-3">Пацієнти</h2>
   <a class="btn btn-primary text-right" role="button" href="/presence/create">Додати Запис</a>
+  <div class="row w-100">
+    <div class="col-4">
+    </div>
+    <div class="col-6 my-3">
+      <form action="/presences/filter" method="GET" class="form-inline">
+        @csrf
+        <div class="input-group">
+          <select name="category" class="form-control w-25">
+            <option value="patients.last_name">Прізвище</option>
+            <option value="patients.first_name">Ім`я</option>
+            <option value="patients.father_name">По-батькові</option>
+            <option value="rooms.number">Палата</option>
+          </select>
+          <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="submit">Find<span class="glyphicon glyphicon-search"></span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
   @foreach($presences as $presence)
   <div class="card mt-3">
     <div class="row font-weight-bold">

@@ -14,7 +14,7 @@
               <label for="number" class="col-md-4 col-form-label text-md-right">{{ __('Номер палати') }}</label>
 
               <div class="col-md-6">
-                  <input id="number" type="number" class="form-control @error('number') is-invalid @enderror" name="number" value="{{ old('number') }}" required autocomplete="number" autofocus>
+                  <input id="number" type="text" class="form-control @error('number') is-invalid @enderror" name="number" value="{{ old('number') }}" required autocomplete="number" autofocus>
 
                   @error('number')
                       <span class="invalid-feedback" role="alert">
@@ -28,7 +28,7 @@
               <label for="capacity" class="col-md-4 col-form-label text-md-right">{{ __('Вмістимість') }}</label>
 
               <div class="col-md-6">
-                  <input id="capacity" type="number" class="form-control @error('capacity') is-invalid @enderror" name="capacity" value="{{ old('capacity') }}" required autocomplete="capacity" autofocus>
+                  <input id="capacity" type="text" class="form-control @error('capacity') is-invalid @enderror" name="capacity" value="{{ old('capacity') }}" required autocomplete="capacity" autofocus>
 
                   @error('capacity')
                       <span class="invalid-feedback" role="alert">

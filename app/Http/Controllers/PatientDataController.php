@@ -6,9 +6,65 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\PatientData;
 use App\Patient;
+use App\Presence;
 
 class PatientDataController extends Controller
 {
+    public function filter($patient)
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $patientInstance = Patient::query()
+                     ->join('presences', 'presences.patient_id', '=',
+                            'patients.id')
+                     ->join('patient_data_patient', 'patient_data_patient.patient_id', '=',
+                            'patients.id')
+                     ->join('patient_data', 'patient_data_patient.patient_data_id', '=',
+                            'patient_data.id')
+                     ->where('presences.patient_id', '=', $patient)
+                     ->where($data['category'], 'like', '%'.$data['search'].'%')
+                     ->select('patients.*')
+                     ->distinct()
+                     ->first();
+
+      if($patientInstance != null && $data['search'] != "")
+      {
+        $date_plan = Patient::query()
+                       ->join('presences', 'presences.patient_id', '=',
+                          'patients.id')
+                       ->join('patient_data_patient', 'patient_data_patient.patient_id', '=',
+                          'patients.id')
+                       ->join('patient_data', 'patient_data_patient.patient_data_id', '=',
+                          'patient_data.id')
+                       ->where('presences.patient_id', '=', $patientInstance->id)
+                       ->where($data['category'], 'like', '%'.$data['search'].'%')
+                       ->select('patient_data_patient.date_plan')
+                       ->distinct()
+                       ->get();
+      }
+      else
+      {
+        $patientInstance = Patient::find($patient);
+        $date_plan = DB::table('patient_data_patient')
+                         ->where('patient_id', '=', $patient)
+                         ->select('date_plan')
+                         ->get();
+      }
+
+      #return view('patientData', [
+        #'patient' => $patientInstance,
+      #  'date_plan' => $date_plan,
+      #  'date_fact' => $date_plan,
+      #]);
+                    #Temporary
+      return redirect()->route('patient.show', [
+        'patient' => $patient,
+      ]);
+    }
+
     public function create($patient)
     {
       $patient = Patient::find($patient);
@@ -40,7 +96,6 @@ class PatientDataController extends Controller
 
       return redirect()->route('patient.show', [
         'patient' => $patient,
-        'count' => 0,
       ]);
     }
 
@@ -68,7 +123,6 @@ class PatientDataController extends Controller
 
       return redirect()->route('patient.show', [
         'patient' => $patient,
-        'count' => 0,
       ]);
     }
 }

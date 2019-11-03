@@ -18,7 +18,6 @@ class MedicamentController extends Controller
 
       return view('medicaments', [
         'medicaments' => $medicaments,
-        'count' => 0,
       ]);
     }
 
@@ -51,7 +50,6 @@ class MedicamentController extends Controller
 
       return view('medicaments', [
         'medicaments' => $medicaments,
-        'count' => 0,
       ]);
     }
 

@@ -28,6 +28,7 @@
         <div class="col-4">
         </div>
       </div>
+      @php($count = 0)
       @foreach($treatments as $treatment)
         @if($count % 2 == 0)
           <div class="row mt-2">

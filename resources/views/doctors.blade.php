@@ -41,11 +41,11 @@
                 @csrf
                 <div class="input-group">
                   <select name="category" class="form-control w-25">
-                    <option value="last_name">Прізвище</option>
-                    <option value="first_name">Ім`я</option>
-                    <option value="father_name">По-батькові</option>
-                    <option value="job">Посада</option>
-                    <option value="department">Відділення</option>
+                    <option value="employees.last_name">Прізвище</option>
+                    <option value="employees.first_name">Ім`я</option>
+                    <option value="employees.father_name">По-батькові</option>
+                    <option value="jobs.name">Посада</option>
+                    <option value="departments.name">Відділення</option>
                   </select>
                   <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
                   <div class="input-group-append">

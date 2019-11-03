@@ -16,7 +16,24 @@ class RoomController extends Controller
 
       return view('rooms', [
         'rooms' => $rooms,
-        'count' => 0,
+      ]);
+    }
+
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $rooms = Room::query()->join('departments', 'departments.id',
+                                   '=', 'rooms.department_id')
+                            ->where($data['category'], 'like', '%'.$data['search'].'%')
+                            ->orderBy('rooms.updated_at', 'DESC')
+                            ->paginate(6);
+
+      return view('rooms', [
+        'rooms' => $rooms,
       ]);
     }
 

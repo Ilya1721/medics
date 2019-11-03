@@ -18,7 +18,6 @@ class DiseaseController extends Controller
 
       return view('diseases', [
         'diseases' => $diseases,
-        'count' => 0,
       ]);
     }
 
@@ -59,7 +58,6 @@ class DiseaseController extends Controller
 
       return view('diseases', [
         'diseases' => $diseases,
-        'count' => 0,
       ]);
     }
 
@@ -129,7 +127,6 @@ class DiseaseController extends Controller
 
       return redirect()->route('disease.show', [
         'diseases' => $diseases,
-        'count' => 0,
       ]);
     }
 
@@ -196,7 +193,6 @@ class DiseaseController extends Controller
 
       return redirect()->route('disease.show', [
         'diseases' => $diseases,
-        'count' => 0,
       ]);
     }
 }

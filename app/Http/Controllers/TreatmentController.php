@@ -15,7 +15,6 @@ class TreatmentController extends Controller
 
       return view('treatments', [
         'treatments' => $treatments,
-        'count' => 0,
       ]);
     }
 
@@ -33,7 +32,6 @@ class TreatmentController extends Controller
 
       return view('treatments', [
         'treatments' => $treatments,
-        'count' => 0,
       ]);
     }
 

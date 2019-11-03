@@ -15,7 +15,6 @@ class ProcedureController extends Controller
 
       return view('procedures', [
         'procedures' => $procedures,
-        'count' => 0,
       ]);
     }
 
@@ -33,7 +32,6 @@ class ProcedureController extends Controller
 
       return view('procedures', [
         'procedures' => $procedures,
-        'count' => 0,
       ]);
     }
 

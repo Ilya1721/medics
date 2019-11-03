@@ -21,6 +21,7 @@ Route::get('/clinics', 'ClinicsController@index')->name('clinics.show');
 Route::get('/doctors', 'DoctorsController@index')->name('doctors.show');
 Route::get('/welcome', 'WelcomeController@index')->name('welcome.show');
 Route::get('/patient/{patient}/show', 'PatientController@index')->name('patient.show');
+Route::get('/patient/{patient}/filter', 'PatientDataController@filter')->name('patient.filter');
 Route::get('/medicaments/show', 'MedicamentController@index')->name('medicaments.show');
 Route::get('/procedures/show', 'ProcedureController@index')->name('procedures.show');
 Route::get('/diseases/show', 'DiseaseController@index')->name('disease.show');
@@ -35,6 +36,8 @@ Route::get('/treatments/filter', 'TreatmentController@filter')->name('treatment.
 Route::get('/procedures/filter', 'ProcedureController@filter')->name('procedure.filter');
 Route::get('/medicaments/filter', 'MedicamentController@filter')->name('medicament.filter');
 Route::get('/diseases/filter', 'DiseaseController@filter')->name('disease.filter');
+Route::get('/rooms/filter', 'RoomController@filter')->name('rooms.filter');
+Route::get('/presences/filter', 'PresenceController@filter')->name('presence.filter');
 Route::get('/patient/{patient}/treatments/show', 'PatientTreatmentController@index')->name('patientTreatment.show');
 Route::get('/patient/{patient}/procedures/show', 'PatientProcedureController@index')->name('patientProcedure.show');
 Route::get('/patient/{patient}/symptoms/show', 'PatientSymptomController@index')->name('patientSymptom.show');
