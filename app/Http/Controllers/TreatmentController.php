@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Treatment;
 
 class TreatmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
       $treatments = Treatment::query()
@@ -15,6 +21,7 @@ class TreatmentController extends Controller
 
       return view('treatments', [
         'treatments' => $treatments,
+        'user' => Auth::user(),
       ]);
     }
 
@@ -32,6 +39,7 @@ class TreatmentController extends Controller
 
       return view('treatments', [
         'treatments' => $treatments,
+        'user' => Auth::user(),
       ]);
     }
 

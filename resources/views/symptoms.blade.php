@@ -2,10 +2,20 @@
 
 @section('content')
   <div class="row mx-4">
-    <div class="col-2">
-
+    <div class="col-3 text-left">
+      <div class="my-3 ml-5">
+        <img src="/storage/{{ $user->employee->image }}" />
+      </div>
+      <h4>{{ $user->employee->last_name }} {{ $user->employee->first_name }} {{ $user->employee->father_name }}</h4>
+      <div class="btn-group-vertical" role="group">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/home"><span class="mx-0">Особистий кабінет</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/personalData/show"><span class="mx-0">Особиста інформація</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="#"><span class="mx-0">Статистика</span></a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/innerData/show"><span class="mx-0">Внутрішні Данні</span></a>
+      </div>
+      <h5 class="mt-3">Ви увійшли як {{ $user->employee->job->name }}</h5>
     </div>
-    <div class="col-8">
+    <div class="col-6">
       <h3>Всі симптоми</h3>
       <a class="btn btn-primary" role="button" href="/symptom/create">Додати Запис</a>
       <div class="row w-100">
@@ -28,35 +38,42 @@
         <div class="col-4">
         </div>
       </div>
-      @php($count = 0)
-      @foreach($symptoms as $symptom)
-        @if($count % 2 == 0)
-          <div class="row mt-2">
-        @endif
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title font-weight-bold">Назва:</h5>
-              <p class="card-text">{{ $symptom->name }}</p>
-              <p class="card-title font-weight-bold">Опис:</p>
-              <p class="card-text">{{ $symptom->description }}</p>
-              <a class="card-text btn btn-info text-right" role="button" href="/symptoms/{{ $symptom->id }}/edit">Редактувати</a>
-              <a class="card-text btn btn-danger text-right" role="button" href="#">Видалити</a>
-            </div>
-          </div>
+      <table class="table table-light">
+        <thead class="thead-dark">
+          <th scope="col">Назва</th>
+          <th scope="col">Опис</th>
+          <th scope="col">Хвороби</th>
+          <th scope="col"></th>
+        </thead>
+        <tbody>
+          @foreach($symptoms as $symptom)
+          <tr>
+            <td>{{ $symptom->name }}</td>
+            <td>{{ $symptom->description }}</td>
+            <td>
+              @foreach($symptom->diseases as $disease)
+                {{ $disease->name }},
+              @endforeach
+            </td>
+            <td>
+              <div class="d-flex inline">
+                <a class="btn btn-primary" role="button"
+                 href="/symptoms/{{ $symptom->id }}/edit">
+                 Редагувати
+                </a>
+              </div>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-center">
+          {{ $symptoms->links() }}
         </div>
-        @php($count++)
-        @if($count % 2 == 0 || $count == count($symptoms))
-          </div>
-        @endif
-        @endforeach
-        <div class="row mt-3">
-          <div class="col-12 d-flex justify-content-center">
-            {{ $symptoms->links() }}
-          </div>
-        </div>
+      </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
 
     </div>
   </div>

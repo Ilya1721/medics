@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Procedure;
 
 class ProcedureController extends Controller
@@ -15,6 +16,7 @@ class ProcedureController extends Controller
 
       return view('procedures', [
         'procedures' => $procedures,
+        'user' => Auth::user(),
       ]);
     }
 
@@ -32,6 +34,7 @@ class ProcedureController extends Controller
 
       return view('procedures', [
         'procedures' => $procedures,
+        'user' => Auth::user(),
       ]);
     }
 

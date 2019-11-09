@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Disease;
 use App\Treatment;
 use App\Symptom;
 
 class DiseaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
       $diseases =  Disease::query()
@@ -18,6 +24,7 @@ class DiseaseController extends Controller
 
       return view('diseases', [
         'diseases' => $diseases,
+        'user' => Auth::user(),
       ]);
     }
 
@@ -58,6 +65,7 @@ class DiseaseController extends Controller
 
       return view('diseases', [
         'diseases' => $diseases,
+        'user' => Auth::user(),
       ]);
     }
 

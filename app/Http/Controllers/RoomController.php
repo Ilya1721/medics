@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Room;
 use App\Department;
 
 class RoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
       $rooms = Room::query()
@@ -16,6 +22,7 @@ class RoomController extends Controller
 
       return view('rooms', [
         'rooms' => $rooms,
+        'user' => Auth::user(),
       ]);
     }
 
@@ -34,6 +41,7 @@ class RoomController extends Controller
 
       return view('rooms', [
         'rooms' => $rooms,
+        'user' => Auth::user(),
       ]);
     }
 

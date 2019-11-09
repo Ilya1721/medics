@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Manufactor;
 use App\Medicament;
 use App\Country;
 
 class MedicamentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
       $medicaments = Medicament::query()
@@ -18,6 +24,7 @@ class MedicamentController extends Controller
 
       return view('medicaments', [
         'medicaments' => $medicaments,
+        'user' => Auth::user(),
       ]);
     }
 
@@ -50,6 +57,7 @@ class MedicamentController extends Controller
 
       return view('medicaments', [
         'medicaments' => $medicaments,
+        'user' => Auth::user(),
       ]);
     }
 
