@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           @php($i = 0)
-          @foreach($patient->medicaments as $medicament)
+          @foreach($medicaments as $medicament)
           <tr>
             <td align="center">{{ $medicament->name }}</td>
             <td align="center">{{ $amount[$i]->amount }}</td>
@@ -57,6 +57,11 @@
           @endforeach
         </tbody>
       </table>
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-center">
+          {{ $medicaments->links() }}
+        </div>
+      </div>
     </div>
     <div class="col-3">
       <h4 class="mt-2">Данні</h4>

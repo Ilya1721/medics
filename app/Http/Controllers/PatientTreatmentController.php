@@ -12,6 +12,14 @@ class PatientTreatmentController extends Controller
     public function index($patient)
     {
       $patient = Patient::find($patient);
+      $treatments = DB::table('patient_treatment')
+                        ->join('treatments', 'treatments.id',
+                               '=', 'patient_treatment.treatment_id')
+                        ->where('patient_treatment.patient_id',
+                                '=', $patient->id)
+                        ->select('treatments.*')
+                        ->orderBy('patient_treatment.updated_at', 'DESC')
+                        ->paginate(15);
       $date_plan = DB::table('patient_treatment')
                        ->where('patient_id', '=', $patient->id)
                        ->select('date_plan')
@@ -23,6 +31,7 @@ class PatientTreatmentController extends Controller
 
       return view('patientTreatment', [
         'patient' => $patient,
+        'treatments' => $treatments,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
       ]);
@@ -79,6 +88,20 @@ class PatientTreatmentController extends Controller
       ]);
       $treatment = Treatment::find($treatment);
       $treatment->update($data);
+
+      return redirect()->route('patientTreatment.show', [
+        'patient' => $patient,
+      ]);
+    }
+
+    public function destroy($patient, $treatment)
+    {
+      DB::table('patient_treatment')
+          ->where('patient_id', '=', $patient)
+          ->where('treatment_id', '=', $treatment)
+          ->delete();
+
+      $treatment = Treatment::find($treatment);
 
       return redirect()->route('patientTreatment.show', [
         'patient' => $patient,

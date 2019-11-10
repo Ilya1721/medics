@@ -26,7 +26,7 @@ Route::get('/personalData/show', 'PersonalDataController@index')->name('personal
 Route::get('/medicaments/show', 'MedicamentController@index')->name('medicaments.show');
 Route::get('/procedures/show', 'ProcedureController@index')->name('procedures.show');
 Route::get('/diseases/show', 'DiseaseController@index')->name('disease.show');
-Route::get('/presence/show', 'PresenceController@index')->name('presence.show');
+Route::get('/presence/show', 'HomeController@index')->name('presence.show');
 Route::get('/rooms/show', 'RoomController@index')->name('rooms.show');
 Route::get('/symptoms/show', 'SymptomController@index')->name('symptoms.show');
 Route::get('/treatments/show', 'TreatmentController@index')->name('treatments.show');
@@ -40,7 +40,7 @@ Route::get('/procedures/filter', 'ProcedureController@filter')->name('procedure.
 Route::get('/medicaments/filter', 'MedicamentController@filter')->name('medicament.filter');
 Route::get('/diseases/filter', 'DiseaseController@filter')->name('disease.filter');
 Route::get('/rooms/filter', 'RoomController@filter')->name('rooms.filter');
-Route::get('/presences/filter', 'PresenceController@filter')->name('presence.filter');
+Route::get('/presences/filter', 'HomeController@filter')->name('presence.filter');
 Route::get('/patient/{patient}/treatments/show', 'PatientTreatmentController@index')->name('patientTreatment.show');
 Route::get('/patient/{patient}/procedures/show', 'PatientProcedureController@index')->name('patientProcedure.show');
 Route::get('/patient/{patient}/symptoms/show', 'PatientSymptomController@index')->name('patientSymptom.show');
@@ -92,14 +92,19 @@ Route::get('/patient/{patient}/data/{data}/edit', 'PatientDataController@edit')-
 Route::patch('/patient/{patient}/data/{data}', 'PatientDataController@update')->name('patientData.update');
 Route::get('/patient/{patient}/treatment/{treatment}/edit', 'PatientTreatmentController@edit')->name('patientTreatment.edit');
 Route::patch('/patient/{patient}/treatment/{treatment}', 'PatientTreatmentController@update')->name('patientTreatment.update');
+Route::get('/patient/{patient}/treatment/{treatment}/delete', 'PatientTreatmentController@destroy')->name('patientTreatment.destroy');
 Route::get('/patient/{patient}/procedure/{procedure}/edit', 'PatientProcedureController@edit')->name('patientProcedure.edit');
 Route::patch('/patient/{patient}/procedure/{procedure}', 'PatientProcedureController@update')->name('patientProcedure.update');
+Route::get('/patient/{patient}/procedure/{procedure}/delete', 'PatientProcedureController@destroy')->name('patientProcedure.destroy');
 Route::get('/patient/{patient}/symptom/{symptom}/edit', 'PatientSymptomController@edit')->name('patientSymptom.edit');
 Route::patch('/patient/{patient}/symptom/{symptom}', 'PatientSymptomController@update')->name('patientSymptom.update');
+Route::get('/patient/{patient}/symptom/{symptom}/delete', 'PatientSymptomController@destroy')->name('patientSymptom.destroy');
 Route::get('/patient/{patient}/medicament/{medicament}/edit', 'PatientMedicamentController@edit')->name('patientMedicament.edit');
 Route::patch('/patient/{patient}/medicament/{medicament}', 'PatientMedicamentController@update')->name('patientMedicament.update');
+Route::get('/patient/{patient}/medicament/{medicament}/delete', 'PatientMedicamentController@destroy')->name('patientMedicament.destroy');
 Route::get('/patient/{patient}/disease/{disease}/edit', 'PatientDiseaseController@edit')->name('patientDisease.edit');
 Route::patch('/patient/{patient}/disease/{disease}', 'PatientDiseaseController@update')->name('patientDisease.update');
+Route::get('/patient/{patient}/disease/{disease}/delete', 'PatientDiseaseController@destroy')->name('patientDisease.destroy');
 Route::get('/presence/{presence}/edit', 'PresenceController@edit')->name('presence.edit');
 Route::patch('/presence/{presence}', 'PresenceController@update')->name('presence.update');
 Route::get('/personalData/edit', 'PersonalDataController@edit')->name('personalData.edit');

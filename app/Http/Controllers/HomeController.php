@@ -57,7 +57,7 @@ class HomeController extends Controller
                              ->distinct()
                              ->orderBy('presences.updated_at', 'DESC')->paginate(3);
 
-      return view('presence', [
+      return view('home', [
         'presences' => $presences,
         'user' => $user
       ]);

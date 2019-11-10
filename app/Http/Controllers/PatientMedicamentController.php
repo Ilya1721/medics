@@ -12,6 +12,14 @@ class PatientMedicamentController extends Controller
     public function index($patient)
     {
       $patient = Patient::find($patient);
+      $medicaments = DB::table('patient_medicament')
+                         ->join('medicaments', 'medicaments.id',
+                                '=', 'patient_medicament.medicament_id')
+                         ->where('patient_medicament.patient_id',
+                                 '=', $patient->id)
+                         ->select('medicaments.*')
+                         ->orderBy('patient_medicament.updated_at', 'DESC')
+                         ->paginate(15);
       $date_plan = DB::table('patient_medicament')
                        ->where('patient_id', '=', $patient->id)
                        ->select('date_plan')
@@ -27,6 +35,7 @@ class PatientMedicamentController extends Controller
 
       return view('patientMedicament', [
         'patient' => $patient,
+        'medicaments' => $medicaments,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
         'amount' => $amount,
@@ -96,6 +105,20 @@ class PatientMedicamentController extends Controller
           ->where('patient_id', '=', $patient)
           ->where('medicament_id', '=', $medicament->id)
           ->update(['amount' => $pivotData['amount']]);
+
+      return redirect()->route('patientMedicament.show', [
+        'patient' => $patient,
+      ]);
+    }
+
+    public function destroy($patient, $medicament)
+    {
+      DB::table('patient_medicament')
+          ->where('patient_id', '=', $patient)
+          ->where('medicament_id', '=', $medicament)
+          ->delete();
+
+      $medicament = Medicament::find($medicament);
 
       return redirect()->route('patientMedicament.show', [
         'patient' => $patient,

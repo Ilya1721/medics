@@ -13,6 +13,14 @@ class PatientDiseaseController extends Controller
     public function index($patient)
     {
       $patient = Patient::find($patient);
+      $diseases = DB::table('patient_diseases')
+                      ->join('diseases', 'diseases.id',
+                             '=', 'patient_diseases.disease_id')
+                      ->where('patient_diseases.patient_id',
+                              '=', $patient->id)
+                      ->select('diseases.*')
+                      ->orderBy('patient_diseases.updated_at', 'DESC')
+                      ->paginate(15);
       $date_plan = DB::table('patient_diseases')
                        ->where('patient_id', '=', $patient->id)
                        ->select('date_scheduled')
@@ -24,6 +32,7 @@ class PatientDiseaseController extends Controller
 
       return view('patientDisease', [
         'patient' => $patient,
+        'diseases' => $diseases,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
       ]);
@@ -32,9 +41,11 @@ class PatientDiseaseController extends Controller
     public function create($patient)
     {
       $patient = Patient::find($patient);
+      $diseases = $patient->diseases;
 
       return view('createPatientDisease', [
         'patient' => $patient,
+        'diseases' => $diseases,
       ]);
     }
 
@@ -78,6 +89,20 @@ class PatientDiseaseController extends Controller
       ]);
       $disease = Disease::find($disease);
       $disease->update($diseaseData);
+
+      return redirect()->route('patientDisease.show', [
+        'patient' => $patient,
+      ]);
+    }
+
+    public function destroy($patient, $disease)
+    {
+      DB::table('patient_diseases')
+          ->where('patient_id', '=', $patient)
+          ->where('disease_id', '=', $disease)
+          ->delete();
+
+      $patient = Patient::find($patient);
 
       return redirect()->route('patientDisease.show', [
         'patient' => $patient,

@@ -28,7 +28,8 @@
               <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Опис') }}</label>
 
               <div class="col-md-6">
-                  <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description" autofocus>
+                  <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
+                   name="description" value="{{ old('description') }}" autocomplete="description" autofocus></textarea>
 
                   @error('description')
                       <span class="invalid-feedback" role="alert">
@@ -41,7 +42,7 @@
             <div class="form-group row">
               <label for="date_plan" class="col-md-4 col-form-label text-md-right">{{ __('Дата призначення') }}</label>
               <div class="col-md-6">
-                  <input id="date_plan" name="date_plan" type="datetime-local" value="2019-10-12T13:45:00" class="form-control" />
+                  <input id="date_plan" name="date_plan" type="datetime" value="{{ date('d-m-Y H:i') }}" class="form-control" />
                   @error('date_plan')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>

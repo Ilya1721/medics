@@ -30,7 +30,7 @@
               <div class="col-md-6">
                   <textarea id="description" class="form-control @error('description')
                     is-invalid @enderror" name="description" value="{{ old('description') }}"
-                    required autocomplete="description" autofocus>
+                    autocomplete="description" autofocus>
                   </textarea>
 
                   @error('description')

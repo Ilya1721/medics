@@ -29,7 +29,8 @@
                   <option value="patients.last_name">Прізвище</option>
                   <option value="patients.first_name">Ім`я</option>
                   <option value="patients.father_name">По-батькові</option>
-                  <option value="rooms.number">Палата</option>
+                  <option value="rooms.number">Кабінет</option>
+                  <option value="patients.street">Вулиця</option>
                 </select>
                 <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
