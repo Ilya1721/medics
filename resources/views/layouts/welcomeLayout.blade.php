@@ -55,10 +55,10 @@
       <main class="py-4">
           @yield('content')
       </main>
-      
+
       <div>
         <nav class="navbar mt-5 fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">KN-17-2</a>
+            <a class="navbar-brand" href="#">КН-17-2</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
