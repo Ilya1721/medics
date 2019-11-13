@@ -37,6 +37,9 @@
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     Особистий кабінет
                 </a>
+                <div class="navbar-brand ml-4 pl-2">
+                  Автоматизоване робоче місце терапевта поліклініки
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

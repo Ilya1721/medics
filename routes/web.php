@@ -32,6 +32,8 @@ Route::get('/symptoms/show', 'SymptomController@index')->name('symptoms.show');
 Route::get('/treatments/show', 'TreatmentController@index')->name('treatments.show');
 Route::get('/statistics/show', 'StatisticsController@index')->name('statistics.show');
 Route::get('/innerData/show', 'InnerDataController@index')->name('innerData.show');
+Route::get('/statistics/show', 'StatisticsController@index')->name('statistics.show');
+Route::get('/statistics/visits/show', 'StatisticsVisitsController@index')->name('statistics.visits.show');
 Route::get('/clinics/filter', 'ClinicsController@filter')->name('clinics.filter');
 Route::get('/doctors/filter', 'DoctorsController@filter')->name('doctors.filter');
 Route::get('/symptoms/filter', 'SymptomController@filter')->name('symptoms.filter');

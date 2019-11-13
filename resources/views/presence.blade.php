@@ -54,7 +54,7 @@
     </div>
     <div class="row my-3 font-weight-bold">
       <div class="col text-center">
-        Дата прибуття: {{ $presence->arrived_at }}
+        Дата візиту: {{ $presence->arrived_at }}
       </div>
       <div class="col text-center">
         Дата виписки: {{ $presence->departure_at }}
