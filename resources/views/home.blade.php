@@ -54,7 +54,7 @@
     </div>
     <div class="row my-3 font-weight-bold">
       <div class="col text-center">
-        Дата візиту: {{ $presence->arrived_at }}
+        Дата візиту: {{ date('d-m-Y H:i', strtotime($presence->arrived_at)) }}
       </div>
       <div class="col text-center">
         Адреса: {{ $presence->patient->street }} {{ $presence->patient->house }} кв.{{ $presence->patient->flat}} м.{{ $presence->patient->city->name }}

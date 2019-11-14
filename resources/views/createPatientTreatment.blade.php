@@ -42,7 +42,7 @@
             <div class="form-group row">
               <label for="date_plan" class="col-md-4 col-form-label text-md-right">{{ __('Дата назначення') }}</label>
               <div class="col-md-6">
-                  <input id="date_plan" name="date_plan" type="datetime-local" value="2019-10-12T13:45:00" class="form-control" />
+                  <input id="date_plan" name="date_plan" type="datetime-local" class="form-control" />
                   @error('date_plan')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>

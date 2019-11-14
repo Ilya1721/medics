@@ -23,10 +23,13 @@ class StatisticsVisitsController extends Controller
                    ->select('presences.arrived_at')
                    ->get();
 
+      setlocale(LC_TIME, 'Ukrainian');
       foreach($dates as $date)
       {
-        $days[] = date('l', strtotime($date->arrived_at));
-        $months[] = date('F', strtotime($date->arrived_at));
+        $days[] = iconv('cp1251', 'UTF-8',
+                  strftime('%A', strtotime($date->arrived_at)));
+        $months[] = iconv('cp1251', 'UTF-8',
+                    strftime('%B', strtotime($date->arrived_at)));
       }
       $daysCount = array_count_values($days);
       $monthsCount = array_count_values($months);

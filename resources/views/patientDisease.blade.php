@@ -18,7 +18,7 @@
       <tr>
         <td align="center">{{ $disease->name }}</td>
         <td align="center">{{ $disease->description }}</td>
-        <td align="center">{{ $date_plan[$i]->date_scheduled }}</td>
+        <td align="center">{{ date('d-m-Y H:i', strtotime($date_plan[$i]->date_scheduled)) }}</td>
         <td>
           <div class="d-flex inline">
             <a class="btn btn-primary mr-2" role="button"

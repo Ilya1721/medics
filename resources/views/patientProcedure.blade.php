@@ -22,7 +22,7 @@
         <td align="center">{{ $procedure->description }}</td>
         <td align="center">{{ $amount[$i]->amount }}</td>
         <td align="center">{{ $procedure->unit_of_measure }}</td>
-        <td align="center">{{ $date_plan[$i]->date_plan }}</td>
+        <td align="center">{{ date('d-m-Y H:i', strtotime($date_plan[$i]->date_plan)) }}</td>
         <td>
           <div class="d-flex inline">
             <a class="btn btn-primary mr-2" role="button"

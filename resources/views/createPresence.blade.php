@@ -87,7 +87,7 @@
             <div class="form-group row">
               <label for="arrived_at" class="col-md-4 col-form-label text-md-right">{{ __('Дата прибуття') }}</label>
               <div class="col-md-6">
-                  <input id="arrived_at" name="arrived_at" type="datetime-local" value="2019-10-12T13:45:00" class="form-control" />
+                  <input id="arrived_at" name="arrived_at" type="datetime-local" class="form-control" />
                   @error('arrived_at')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
