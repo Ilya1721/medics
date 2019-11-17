@@ -22,7 +22,7 @@
   <div class="card mt-3">
     <div class="row mt-2">
       <div class="col-2">
-        <img src="/img/noImage.png" style="width: 125px; height: 150px;" />
+        <img src="{{ $clinic->image }}" alt="No-Image" style="width: 125px; height: 150px;" />
       </div>
       <div class="col-6">
         <h4>

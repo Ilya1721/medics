@@ -23,7 +23,7 @@
           <div class="d-flex inline">
             <a class="btn btn-primary mr-2" role="button"
              href="/patient/{{ $patient->id }}/treatment/{{ $treatment->id}}/edit">
-             Редактувати
+             Редагувати
             </a>
             <a class="btn btn-danger" role="button"
              href="/patient/{{ $patient->id }}/treatment/{{ $treatment->id}}/delete">
