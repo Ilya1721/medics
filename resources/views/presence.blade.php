@@ -1,82 +1,63 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.presenceLayout')
+@section('main')
 <div class="container">
-  <h2 class="text-center mt-3">Пацієнти</h2>
-  <a class="btn btn-primary text-right" role="button" href="/presence/create">Додати Запис</a>
-  <div class="row w-100">
-    <div class="col-4">
-    </div>
-    <div class="col-6 my-3">
-      <form action="/presences/filter" method="GET" class="form-inline">
-        @csrf
-        <div class="input-group">
-          <select name="category" class="form-control w-25">
-            <option value="patients.last_name">Прізвище</option>
-            <option value="patients.first_name">Ім`я</option>
-            <option value="patients.father_name">По-батькові</option>
-            <option value="rooms.number">Палата</option>
-          </select>
-          <input id="search" name="search" class="form-control w-50 input-group-append" type="text" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-success" type="submit">Find<span class="glyphicon glyphicon-search"></span></button>
+  <div class="row">
+    <div class="col-12">
+      <h3>Дані візиту</h3>
+        <div class="card rounded-0 mt-3">
+          <div class="row">
+            <div class="col pr-0">
+              <div class="card border-top-0 border-left-0 rounded-0 container">
+                <div class="card-body">
+                  №{{ $presence->id }}
+                </div>
+              </div>
+            </div>
+            <div class="col px-0">
+              <div class="card border-top-0 border-left-0 border-right-0 rounded-0 container">
+                <div class="card-body">
+                  Початок: {{ $presence->arrived_at }}
+                </div>
+              </div>
+            </div>
+            <div class="col pl-0">
+              <div class="card border-top-0 border-right-0 rounded-0 container">
+                <div class="card-body">
+                  Кінець: {{ $presence->departure_at }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col pr-0">
+              <div class="card rounded-0 container border-left-0 border-bottom-0 border-top-0 border-right-1">
+                <div class="card-body">
+                  <h3>Пацієнт</h3>
+                  <p><h5>ПІБ:</h5> {{ $presence->patient->last_name}} {{$presence->patient->first_name}} {{ $presence->patient->father_name }}</p>
+                  <p><h5>Адреса:</h5> м.{{ $presence->patient->city->name}}
+                         вул.{{ $presence->patient->street}} {{ $presence->patient->house}}
+                         кв. {{ $presence->patient->flat }}</p>
+                  <p><h5>Телефон:</h5> {{ $presence->patient->phone_number }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col pl-0">
+              <div class="card rounded-0 container border-0">
+                <div class="card-body">
+                  <h3>Прийом</h3>
+                  <p><h5>Заклад:</h5>{{ $presence->room->department->clinic->name }}</p>
+                  <p><h5>Кабінет:</h5>{{ $presence->room->number }}</p>
+                  <div class="pt-0">
+                    <a href="/presence/{{ $presence->id }}/edit" class="btn btn-info" role="button">
+                      Редагувати
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
-    <div class="col-4">
-    </div>
-  </div>
-  @foreach($presences as $presence)
-  <div class="card mt-3">
-    <div class="row font-weight-bold">
-      <div class="col text-center">
-        <div class="card-body">
-          {{ $presence->patient->last_name }} {{$presence->patient->first_name }} {{ $presence->patient->father_name }}
-        </div>
       </div>
-    </div>
-    <div class="row my-3 font-weight-bold">
-      <div class="col text-center">
-        Номер палати: {{ $presence->room->number }}
-      </div>
-      <div class="col text-center">
-        Заклад: {{ $presence->room->department->clinic->name }}
-      </div>
-      <div class="col text-center">
-        Доктор: {{ $presence->doctor->last_name }} {{ $presence->doctor->first_name }} {{ $presence->doctor->father_name }}
-      </div>
-      <div class="col">
-        <a class="btn btn-primary" role="button" href="/patient/{{ $presence->patient->id }}/show">
-          <span class="mx-5">Детальніше</span>
-        </a>
-      </div>
-    </div>
-    <div class="row my-3 font-weight-bold">
-      <div class="col text-center">
-        Дата візиту: {{ $presence->arrived_at }}
-      </div>
-      <div class="col text-center">
-        Дата виписки: {{ $presence->departure_at }}
-      </div>
-      <div class="col text-center">
-        Адреса: {{ $presence->patient->street }} {{ $presence->patient->house }} кв.{{ $presence->patient->flat}} м.{{ $presence->patient->city->name }}
-      </div>
-      <div class="col">
-        Номер телефону: {{ $presence->patient->phone_number }}
-      </div>
-    </div>
-    <div class="row my-3 text-center">
-      <div class="col">
-        <a class="btn btn-info mx-1" href="/presence/{{ $presence->id }}/edit">Редагувати</a>
-        <a class="btn btn-danger mx-1" href="#">Видалити</a>
-      </div>
-    </div>
-  </div>
-  @endforeach
-  <div class="row mt-3">
-    <div class="col-12 d-flex justify-content-center">
-      {{ $presences->links() }}
     </div>
   </div>
 </div>

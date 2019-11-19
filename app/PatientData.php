@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PatientData extends Model
+class presenceData extends Model
 {
     protected $guarded = [];
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_data_patient');
+      return $this->belongsToMany(presence::class, 'presence_data_presence');
     }
 }

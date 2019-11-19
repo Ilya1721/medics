@@ -29,6 +29,10 @@
                 <li class="nav-item active">
                   <a class="nav-link text-secondary" href="/clinics">Клініки <span class="sr-only">(current)</span></a>
                 </li>
+                <div class="navbar-brand ml-2">
+                    <img src="/img/medicsLogo.svg" class="float-left pr-1" />
+                    Medics
+                </div>
                 <li>
                   <div class="flex-right">
                     @if (Route::has('login'))

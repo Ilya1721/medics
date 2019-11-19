@@ -2,21 +2,23 @@
 @section('content')
   <div class="row mx-4">
     <div class="col-2">
-      <h4>{{ $patient->last_name }} {{ $patient->first_name }} {{ $patient->father_name }}</h4>
       <div class="btn-group-vertical" role="group">
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptoms/show">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->id }}/show">
+          <span class="mx-5">Дані візиту</span>
+        </a>
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->patient->id }}/symptoms/show">
           <span class="mx-5">Симптоми</span>
         </a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/treatments/show">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->patient->id }}/treatments/show">
           <span class="mx-5">Лікування</span>
         </a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/procedures/show">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->patient->id }}/procedures/show">
           <span class="mx-5">Процедури</span>
         </a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/medicaments/show">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->patient->id }}/medicaments/show">
           <span class="mx-5">Медикаменти</span>
         </a>
-        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/diseases/show">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/presence/{{ $presence->patient->id }}/diseases/show">
           <span class="mx-5">Діагнози</span>
         </a>
       </div>

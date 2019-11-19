@@ -13,9 +13,9 @@ class PatientDataPatient extends Migration
      */
     public function up()
     {
-      Schema::create('patient_data_patient', function (Blueprint $table) {
+      Schema::create('presence_data_presence', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->unsignedBigInteger('patient_id');
+          $table->unsignedBigInteger('presence_id');
           $table->unsignedBigInteger('patient_data_id');
           $table->datetime('date_plan');
           $table->datetime('date_fact');
@@ -31,6 +31,6 @@ class PatientDataPatient extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_data_patient');
+        Schema::dropIfExists('presence_data_presence');
     }
 }

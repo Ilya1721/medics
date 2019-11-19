@@ -13,9 +13,9 @@ class CreatePatientDiseasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_diseases', function (Blueprint $table) {
+        Schema::create('presence_disease', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('patient_id');
+            $table->unsignedBigInteger('presence_id');
             $table->unsignedBigInteger('disease_id');
             $table->unsignedBigInteger('doctor_id');
             $table->datetime('date_scheduled')->nullable();
@@ -32,6 +32,6 @@ class CreatePatientDiseasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_diseases');
+        Schema::dropIfExists('presence_disease');
     }
 }

@@ -5,9 +5,9 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Edit Symptom') }}</div>
+        <div class="card-header">{{ __('Редактувати діагноз') }}</div>
         <div class="card-body">
-          <form method="POST" action="/symptoms/{{ $symptom->id }}">
+          <form method="POST" action="/presence/{{ $presence->id }}/disease/{{ $disease->id }}">
             @csrf
             @method('PATCH')
 
@@ -15,8 +15,9 @@
               <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Назва') }}</label>
 
               <div class="col-md-6">
-                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                   value="{{ old('name') ?? $symptom->name }}" required autocomplete="name" autofocus>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                   name="name" value="{{ old('name') ?? $disease->name }}"
+                   required autocomplete="name" autofocus>
 
                   @error('name')
                       <span class="invalid-feedback" role="alert">
@@ -31,7 +32,7 @@
 
               <div class="col-md-6">
                   <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
-                   name="description" autocomplete="description" autofocus>{{ old('description') ?? $symptom->description }}</textarea>
+                   name="description" autocomplete="description" autofocus>{{ old('description') ?? $disease->description }}</textarea>
 
                   @error('description')
                       <span class="invalid-feedback" role="alert">

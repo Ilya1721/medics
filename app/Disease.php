@@ -8,9 +8,9 @@ class Disease extends Model
 {
     protected $guarded = [];
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_diseases');
+      return $this->belongsToMany(Presence::class, 'presence_disease');
     }
 
     public function symptoms()

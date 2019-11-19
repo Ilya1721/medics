@@ -13,8 +13,8 @@ class Treatment extends Model
       return $this->belongsToMany(Disease::class, 'treatment_diseases');
     }
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_treatment');
+      return $this->belongsToMany(Presence::class, 'presence_treatment');
     }
 }

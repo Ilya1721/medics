@@ -17,14 +17,12 @@ class PresenceController extends Controller
       $this->middleware('auth');
     }
 
-    public function index()
+    public function index($presenceId)
     {
-      $presences = Presence::query()
-                   ->where('presences.doctor_id', '=', Auth::user()->employee->id)
-                   ->orderBy('presences.updated_at', 'DESC')->paginate(3);
+      $presence = Presence::find($presenceId);
 
       return view('presence', [
-        'presences' => $presences,
+        'presence' => $presence,
       ]);
     }
 
@@ -54,7 +52,9 @@ class PresenceController extends Controller
       $rooms = Room::all();
       $doctors = Employee::query()
                  ->join('jobs', 'jobs.id', '=', 'employees.job_id')
-                 ->where('jobs.name', 'Лікар')->get();
+                 ->where('jobs.name', 'Лікар')
+                 ->select('employees.*')
+                 ->get();
       $cities = City::all();
 
       return view('createPresence', [
@@ -70,6 +70,7 @@ class PresenceController extends Controller
         'room_id' => '',
         'doctor_id' => '',
         'arrived_at' => '',
+        'departure_at' => '',
       ]);
 
       $patientData = request()->validate([
@@ -91,9 +92,7 @@ class PresenceController extends Controller
 
       $presences = Presence::all();
 
-      return redirect()->route('presence.show', [
-        'presences' => $presences,
-      ]);
+      return redirect('/home');
     }
 
     public function edit(Presence $presence)

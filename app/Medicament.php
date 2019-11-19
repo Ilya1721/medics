@@ -13,8 +13,8 @@ class Medicament extends Model
       return $this->belongsToMany(Manufactor::class, 'medicament_manufactor');
     }
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_medicament');
+      return $this->belongsToMany(presence::class, 'presence_medicament');
     }
 }

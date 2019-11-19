@@ -13,9 +13,9 @@ class PatientMedicament extends Migration
      */
     public function up()
     {
-      Schema::create('patient_medicament', function (Blueprint $table) {
+      Schema::create('presence_medicament', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->unsignedBigInteger('patient_id');
+          $table->unsignedBigInteger('presence_id');
           $table->unsignedBigInteger('medicament_id');
           $table->string('amount');
           $table->datetime('date_plan')->useCurrent();
@@ -32,6 +32,6 @@ class PatientMedicament extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_medicament');
+        Schema::dropIfExists('presence_medicament');
     }
 }

@@ -73,7 +73,7 @@
               <div class="col-md-6">
                   <select id="doctor_id" class="form-control" @error('doctor_id') is-invalid @enderror name="doctor_id" required autofocus>
                     @foreach($doctors as $doctor)
-                    <option value={{ $doctor->id }}>{{ $doctor->last_name }} {{ $doctor->first_name }} {{ $doctor->father_name }}</option>
+                    <option value="{{ $doctor->id }}">{{ $doctor->last_name }} {{ $doctor->first_name }} {{ $doctor->father_name }}</option>
                     @endforeach
                   </select>
                   @error('doctor_id')
@@ -85,10 +85,22 @@
             </div>
 
             <div class="form-group row">
-              <label for="arrived_at" class="col-md-4 col-form-label text-md-right">{{ __('Дата прибуття') }}</label>
+              <label for="arrived_at" class="col-md-4 col-form-label text-md-right">{{ __('Дата початку') }}</label>
               <div class="col-md-6">
                   <input id="arrived_at" name="arrived_at" type="datetime-local" class="form-control" />
                   @error('arrived_at')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="departure_at" class="col-md-4 col-form-label text-md-right">{{ __('Дата кінця') }}</label>
+              <div class="col-md-6">
+                  <input id="departure_at" name="departure_at" type="datetime-local" class="form-control" />
+                  @error('departure_at')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>

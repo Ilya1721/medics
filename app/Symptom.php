@@ -13,8 +13,8 @@ class Symptom extends Model
       return $this->belongsToMany(Disease::class, 'symptom_diseases');
     }
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_symptom');
+      return $this->belongsToMany(Presence::class, 'presence_symptom');
     }
 }

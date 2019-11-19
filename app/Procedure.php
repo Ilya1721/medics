@@ -8,8 +8,8 @@ class Procedure extends Model
 {
     protected $guarded = [];
 
-    public function patients()
+    public function presences()
     {
-      return $this->belongsToMany(Patient::class, 'patient_procedure');
+      return $this->belongsToMany(Presence::class, 'presence_procedure');
     }
 }

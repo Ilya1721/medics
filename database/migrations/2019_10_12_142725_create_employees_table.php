@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('city_id')->nullable();
             $table->unsignedBigInteger('job_id')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
+            $table->string('about')->nullable();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('father_name')->nullable();

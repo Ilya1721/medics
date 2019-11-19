@@ -4,40 +4,45 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Patient;
+use App\Presence;
 
 class PatientController extends Controller
 {
-    public function index($patient)
+    public function index()
     {
-      $patient = Patient::find($patient);
-      $symptoms = DB::table('patient_symptom')
-                      ->join('symptoms', 'symptoms.id',
-                             '=', 'patient_symptom.symptom_id')
-                      ->where('patient_symptom.patient_id',
-                              '=', $patient->id)
-                      ->select('symptoms.*')
-                      ->orderBy('patient_symptom.updated_at', 'DESC')
-                      ->paginate(15);
-      $date_plan = DB::table('patient_symptom')
-                       ->where('patient_id', '=', $patient->id)
-                       ->select('date_plan')
-                       ->get();
-      $date_fact = DB::table('patient_symptom')
-                       ->where('patient_id', '=', $patient->id)
-                       ->select('date_fact')
-                       ->get();
-      $amount = DB::table('patient_symptom')
-                    ->where('patient_id', '=', $patient->id)
-                    ->select('amount')
-                    ->get();
+      $patients = Patient::query()
+                  ->orderBy('updated_at', 'DESC')
+                  ->paginate(15);
 
-      return view('patientSymptom', [
-        'patient' => $patient,
-        'symptoms' => $symptoms,
-        'date_plan' => $date_plan,
-        'date_fact' => $date_fact,
-        'amount' => $amount,
+      $user = Auth::user();
+
+      return view('patients', [
+        'patients' => $patients,
+        'user' => $user,
+      ]);
+    }
+
+    public function filter()
+    {
+      $data = request()->validate([
+        'search' => '',
+        'category' => '',
+      ]);
+
+      $user = Auth::user();
+      $patients = Presence::query()
+                             ->join('patients', 'patients.id', 'presences.patient_id')
+                             ->where($data['category'], 'like', '%'.$data['search'].'%')
+                             ->where('presences.doctor_id', '=', Auth::user()->employee->id)
+                             ->select('patients.*')
+                             ->distinct()
+                             ->orderBy('patients.updated_at', 'DESC')->paginate(15);
+
+      return view('patients', [
+        'patients' => $patients,
+        'user' => $user,
       ]);
     }
 }

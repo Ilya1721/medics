@@ -30,15 +30,27 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                  <img src="/img/medicsLogo.svg" />
-                    Домашня сторінка
+                <a class="navbar-brand text-secondary" href="{{ url('/') }}">
+                    Домашня
                 </a>
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    Особистий кабінет
+                <a class="navbar-brand text-secondary" href="{{ url('/home') }}">
+                    Кабінет
                 </a>
-                <div class="navbar-brand ml-4 pl-2">
-                  Автоматизоване робоче місце терапевта поліклініки
+                <a class="navbar-brand text-secondary" href="/personalData/show">
+                  Особисті дані
+                </a>
+                <a class="navbar-brand text-secondary" href="/statistics/show">
+                  Статистика
+                </a>
+                <a class="navbar-brand text-secondary" href="/innerData/show">
+                  Внутрішні дані
+                </a>
+                <a class="navbar-brand text-secondary" href="#">
+                  Пацієнти
+                </a>
+                <div class="navbar-brand ml-2" style="font-size: 0.9rem;">
+                    <img src="/img/medicsLogo.svg" class="float-left pr-1" />
+                    Автоматизоване робоче<p>місце терапевта поліклініки
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
