@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Patient;
+use App\Presence;
 use App\Medicament;
 
 class PatientMedicamentController extends Controller
@@ -12,24 +14,29 @@ class PatientMedicamentController extends Controller
     public function index($patient)
     {
       $patient = Patient::find($patient);
-      $medicaments = DB::table('patient_medicament')
-                         ->join('medicaments', 'medicaments.id',
-                                '=', 'patient_medicament.medicament_id')
-                         ->where('patient_medicament.patient_id',
-                                 '=', $patient->id)
-                         ->select('medicaments.*')
-                         ->orderBy('patient_medicament.updated_at', 'DESC')
-                         ->paginate(15);
-      $date_plan = DB::table('patient_medicament')
-                       ->where('patient_id', '=', $patient->id)
+
+      $medicaments = DB::table('presence_medicament')
+                      ->join('medicaments', 'medicaments.id',
+                             '=', 'presence_medicament.medicament_id')
+                      ->join('presences', 'presences.id', '=', 'presence_medicament.presence_id')
+                      ->where('presences.patient_id',
+                              '=', $patient->id)
+                      ->select('medicaments.*')
+                      ->orderBy('presence_medicament.updated_at', 'DESC')
+                      ->paginate(15);
+      $date_plan = DB::table('presence_medicament')
+                       ->join('presences', 'presences.id', '=', 'presence_medicament.presence_id')
+                       ->where('presences.patient_id', '=', $patient->id)
                        ->select('date_plan')
                        ->get();
-      $date_fact = DB::table('patient_medicament')
-                       ->where('patient_id', '=', $patient->id)
+      $date_fact = DB::table('presence_medicament')
+                       ->join('presences', 'presences.id', '=', 'presence_medicament.presence_id')
+                       ->where('presences.patient_id', '=', $patient->id)
                        ->select('date_fact')
                        ->get();
-      $amount = DB::table('patient_medicament')
-                    ->where('patient_id', '=', $patient->id)
+      $amount = DB::table('presence_medicament')
+                    ->join('presences', 'presences.id', '=', 'presence_medicament.presence_id')
+                    ->where('presences.patient_id', '=', $patient->id)
                     ->select('amount')
                     ->get();
 
@@ -39,89 +46,6 @@ class PatientMedicamentController extends Controller
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
         'amount' => $amount,
-      ]);
-    }
-
-    public function create($patient)
-    {
-      $patient = Patient::find($patient);
-
-      return view('createPatientMedicament', [
-        'patient' => $patient,
-      ]);
-    }
-
-    public function store($patient)
-    {
-      $medicamentData = request()->validate([
-        'name' => 'required',
-        'unit_of_measure' => 'required',
-      ]);
-      $pivotData = request()->validate([
-        'amount' => 'required',
-        'date_plan' => 'required',
-      ]);
-      $medicament = Medicament::updateOrCreate($medicamentData);
-      DB::table('patient_medicament')->updateOrInsert([
-        'patient_id' => $patient, 'medicament_id' => $medicament->id,
-        'date_plan' => $pivotData['date_plan'], 'date_fact' => $pivotData['date_plan'],
-        'amount' => $pivotData['amount'],
-      ]);
-
-      return redirect()->route('patientMedicament.show', [
-        'patient' => $patient,
-      ]);
-    }
-
-    public function edit($patient, $medicament)
-    {
-      $patient = Patient::find($patient);
-      $medicament = Medicament::find($medicament);
-      $amount = DB::table('patient_medicament')
-                    ->where('patient_id', '=', $patient->id)
-                    ->where('medicament_id', '=', $medicament->id)
-                    ->value('amount');
-
-      return view('editPatientMedicament', [
-        'patient' => $patient,
-        'medicament' => $medicament,
-        'amount' => $amount,
-      ]);
-    }
-
-    public function update($patient, $medicament)
-    {
-      $medicamentData = request()->validate([
-        'name' => 'required',
-        'unit_of_measure' => 'required',
-      ]);
-      $pivotData = request()->validate([
-        'amount' => 'required',
-      ]);
-      $medicament = Medicament::find($medicament);
-      $medicament->update($medicamentData);
-
-      DB::table('patient_medicament')
-          ->where('patient_id', '=', $patient)
-          ->where('medicament_id', '=', $medicament->id)
-          ->update(['amount' => $pivotData['amount']]);
-
-      return redirect()->route('patientMedicament.show', [
-        'patient' => $patient,
-      ]);
-    }
-
-    public function destroy($patient, $medicament)
-    {
-      DB::table('patient_medicament')
-          ->where('patient_id', '=', $patient)
-          ->where('medicament_id', '=', $medicament)
-          ->delete();
-
-      $medicament = Medicament::find($medicament);
-
-      return redirect()->route('patientMedicament.show', [
-        'patient' => $patient,
       ]);
     }
 }

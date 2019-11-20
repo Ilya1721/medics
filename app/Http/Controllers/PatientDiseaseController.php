@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Patient;
+use App\Presence;
 use App\Disease;
 
 class PatientDiseaseController extends Controller
@@ -13,20 +14,24 @@ class PatientDiseaseController extends Controller
     public function index($patient)
     {
       $patient = Patient::find($patient);
-      $diseases = DB::table('patient_diseases')
+
+      $diseases = DB::table('presence_disease')
                       ->join('diseases', 'diseases.id',
-                             '=', 'patient_diseases.disease_id')
-                      ->where('patient_diseases.patient_id',
+                             '=', 'presence_disease.disease_id')
+                      ->join('presences', 'presences.id', '=', 'presence_disease.presence_id')
+                      ->where('presences.patient_id',
                               '=', $patient->id)
                       ->select('diseases.*')
-                      ->orderBy('patient_diseases.updated_at', 'DESC')
+                      ->orderBy('presence_disease.updated_at', 'DESC')
                       ->paginate(15);
-      $date_plan = DB::table('patient_diseases')
-                       ->where('patient_id', '=', $patient->id)
+      $date_plan = DB::table('presence_disease')
+                       ->join('presences', 'presences.id', '=', 'presence_disease.presence_id')
+                       ->where('presences.patient_id', '=', $patient->id)
                        ->select('date_scheduled')
                        ->get();
-      $date_fact = DB::table('patient_diseases')
-                       ->where('patient_id', '=', $patient->id)
+      $date_fact = DB::table('presence_disease')
+                       ->join('presences', 'presences.id', '=', 'presence_disease.presence_id')
+                       ->where('presences.patient_id', '=', $patient->id)
                        ->select('date_fact')
                        ->get();
 
@@ -35,77 +40,6 @@ class PatientDiseaseController extends Controller
         'diseases' => $diseases,
         'date_plan' => $date_plan,
         'date_fact' => $date_fact,
-      ]);
-    }
-
-    public function create($patient)
-    {
-      $patient = Patient::find($patient);
-      $diseases = $patient->diseases;
-
-      return view('createPatientDisease', [
-        'patient' => $patient,
-        'diseases' => $diseases,
-      ]);
-    }
-
-    public function store($patient)
-    {
-      $diseaseData = request()->validate([
-        'name' => 'required',
-        'description' => '',
-      ]);
-      $pivotData = request()->validate([
-        'date_plan' => 'required',
-      ]);
-      $disease = Disease::updateOrCreate($diseaseData);
-      DB::table('patient_diseases')->updateOrInsert([
-        'patient_id' => $patient, 'disease_id' => $disease->id,
-        'date_scheduled' => $pivotData['date_plan'], 'date_fact' => $pivotData['date_plan'],
-        'doctor_id' => Auth::user()->employee->id,
-      ]);
-
-      return redirect()->route('patientDisease.show', [
-        'patient' => $patient,
-      ]);
-    }
-
-    public function edit($patient, $disease)
-    {
-      $patient = Patient::find($patient);
-      $disease = Disease::find($disease);
-
-      return view('editPatientDisease', [
-        'patient' => $patient,
-        'disease' => $disease,
-      ]);
-    }
-
-    public function update($patient, $disease)
-    {
-      $diseaseData = request()->validate([
-        'name' => 'required',
-        'description' => '',
-      ]);
-      $disease = Disease::find($disease);
-      $disease->update($diseaseData);
-
-      return redirect()->route('patientDisease.show', [
-        'patient' => $patient,
-      ]);
-    }
-
-    public function destroy($patient, $disease)
-    {
-      DB::table('patient_diseases')
-          ->where('patient_id', '=', $patient)
-          ->where('disease_id', '=', $disease)
-          ->delete();
-
-      $patient = Patient::find($patient);
-
-      return redirect()->route('patientDisease.show', [
-        'patient' => $patient,
       ]);
     }
 }

@@ -29,6 +29,7 @@
       <div class="col-8 text-left">
         <div class="card-body text-left">
           {{ $doctor->last_name }} {{$doctor->first_name }} {{ $doctor->father_name }}
+          <p class="font-weight-normal">{{ $doctor->about }}</p>
         </div>
       </div>
     </div>

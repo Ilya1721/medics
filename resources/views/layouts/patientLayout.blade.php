@@ -4,6 +4,9 @@
     <div class="col-2">
       <h4>{{ $patient->last_name }} {{ $patient->first_name }} {{ $patient->father_name }}</h4>
       <div class="btn-group-vertical" role="group">
+        <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/show">
+          <span class="mx-0">Картка пацієнта</span>
+        </a>
         <a class="btn btn-outline-primary btn-lg" role="button" href="/patient/{{ $patient->id }}/symptoms/show">
           <span class="mx-5">Симптоми</span>
         </a>

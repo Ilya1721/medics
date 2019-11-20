@@ -93,6 +93,9 @@
                   <button type="submit" class="btn btn-primary">
                       {{ __('Register') }}
                   </button>
+                  <a href="/diseases/show" class="btn btn-danger" role="button">
+                    Cancel
+                  </a>
               </div>
             </div>
           </form>

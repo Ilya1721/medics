@@ -47,6 +47,9 @@
                   <button type="submit" class="btn btn-primary">
                       {{ __('Submit') }}
                   </button>
+                  <a href="/presence/{{ $presence->id }}/diseases/show" class="btn btn-danger" role="button">
+                    Cancel
+                  </a>
               </div>
             </div>
           </form>

@@ -33,7 +33,7 @@
         <td>{{ $patient->first_name }}</td>
         <td>{{ $patient->father_name }}</td>
         <td>
-          <a href="#" class="btn btn-primary">
+          <a href="/patient/{{ $patient->id }}/show" class="btn btn-primary">
             Детальніше
           </a>
         </td>

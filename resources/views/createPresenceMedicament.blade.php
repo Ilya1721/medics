@@ -69,6 +69,9 @@
                   <button type="submit" class="btn btn-primary">
                       {{ __('Register') }}
                   </button>
+                  <a href="/presence/{{ $presence->id }}/medicaments/show" class="btn btn-danger" role="button">
+                    Cancel
+                  </a>
               </div>
             </div>
           </form>

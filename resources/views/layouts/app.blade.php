@@ -45,7 +45,7 @@
                 <a class="navbar-brand text-secondary" href="/innerData/show">
                   Внутрішні дані
                 </a>
-                <a class="navbar-brand text-secondary" href="#">
+                <a class="navbar-brand text-secondary" href="/patients/show">
                   Пацієнти
                 </a>
                 <div class="navbar-brand ml-2" style="font-size: 0.9rem;">
